@@ -1,25 +1,30 @@
-//import { Link } from 'react-router';
+import Link from 'next/link'
 
 function Sidebar() {
     return (
         <div>
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
-                    </div>
-                    <div class="sidebar-brand-text mx-3">Onyx</div>
-                </a>
+                
+                <Link href="/" passHref>
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center">
+                        <div class="sidebar-brand-icon rotate-n-15">
+                            <i class="fas fa-laugh-wink"></i>
+                        </div>
+                        <div class="sidebar-brand-text mx-3">Onyx</div>
+                    </a>
+                </Link>
 
                 <hr class="sidebar-divider my-0"/>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
+                <Link href="/MyAccount" passHref>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="fas fa-fw fa-tachometer-alt"></i>
+                            <span>My Account</span>
+                        </a>
+                    </li>
+                </Link>
+
 
                 <hr class="sidebar-divider"/>
 

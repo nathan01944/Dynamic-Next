@@ -16,7 +16,7 @@ const BetCard = ({ num, oddsdata }) => {
             </div>
         </div>
     );
-  };
+};
   
 
 function FeaturedBets() {

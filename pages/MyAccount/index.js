@@ -1,12 +1,14 @@
 import Head from 'next/head'
+import React from 'react'
 import Image from 'next/image'
 //components
-import FeaturedBets from './FeaturedBets'
-import Sidebar from '../common/sidebar'
-import Topbar from '../common/Topbar'
-import Footer from '../common/footer'
+import Sidebar from '../../common/sidebar'
+import Topbar from '../../common/Topbar'
+import Footer from '../../common/footer'
+import AccountDetails from './AccountDetails.js'
+import BetHistory from './BetHistory'
 
-export default function Home() {
+export default function MyAccount() {
   return (
     <div >
       <Head>
@@ -24,7 +26,15 @@ export default function Home() {
                 <Topbar />
                 
               </div>
-              <FeaturedBets />
+              
+              <div>
+                <AccountDetails />
+              </div>
+
+              <div>
+                <BetHistory />
+              </div>
+                
             </div>
           </div>
         </div>
