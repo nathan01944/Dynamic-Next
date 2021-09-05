@@ -9,26 +9,32 @@ import Footer from '../../../common/footer'
 import BetInterface3x2 from '../../../common/BetInterface3x2'
 import MLBdata from '../../../data/formatted.json'
 
-const BetCard = ({ num, oddsdata }) => {
-    return (
-        <div class="col-xl-6 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <BetInterface3x2  
-                            num={num}
-                            oddsdata={oddsdata}
-                        />
+export default function SubmitBet() {
+    const router = useRouter()
+    //const {gameID,bettype} = router.query
+    const {
+        query: { gameID, bettype },
+      } = router
+
+    //console.log(gameID*1)
+    console.log(gameID*1)
+
+    const BetCard = ({ num, oddsdata }) => {
+        return (
+            <div class="col-xl-6 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <BetInterface3x2  
+                                num={num}
+                                oddsdata={oddsdata}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
-};
-
-export default function SubmitBet() {
-    const router = useRouter()
-    const { gameID } = router.query
+        );
+    };
 
   return (
     <div >
@@ -50,11 +56,12 @@ export default function SubmitBet() {
               
               <div class="row container">
                 <BetCard  
-                    num={gameID}
+                    num = {1}
                     oddsdata={MLBdata}
                 />
+                {MLBdata.away_team[gameID]}
               </div>
-                
+              
             </div>
           </div>
         </div>

@@ -24,7 +24,7 @@ function FeaturedBets() {
         <div class="container-fluid"> 
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Featured Bets</h1>
+                <h1 class="h3 mb-0 text-gray-800"> </h1>
                 <a href="#" class="btn btn-primary btn-icon-split">
                     <span class="icon text-white-50">
                         <i class="fas fa-arrow-right"></i>
@@ -33,6 +33,9 @@ function FeaturedBets() {
                 </a>
             </div>
 
+            <div class="row justify-content-between mb-4 text-center">
+                <h1 class="h1 mb-0 text-gray-800 text-center">Bet Big No Vig</h1>
+            </div>
 
             <div class="row">
                 <div class="card shadow mb-4">
