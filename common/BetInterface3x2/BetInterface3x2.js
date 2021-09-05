@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/dist/client/link';
 //import oddsdata from '../../data/formatted.json'
 
 const BetInterface3x2 = ({oddsdata, num}) => {
@@ -11,19 +12,22 @@ const BetInterface3x2 = ({oddsdata, num}) => {
     },
     {
       team: oddsdata.away_team[num],
-      h2h: oddsdata.odds[num].h2h_away,
+      h2h: addplus(oddsdata.odds[num].h2h_away),
       spread: addplus(oddsdata.odds[num].spread_away_line) + ": " + addplus(oddsdata.odds[num].spread_away),
       overunder: oddsdata.odds[num].totals_line + ": " + addplus(oddsdata.odds[num].totals_under) + "u",
     }
   ]
 
   return (
-    <>
+    <div>
       <Description 
         home_team = {game1[0].team}
         away_team= {game1[1].team}
         date={oddsdata.commence_time[num]}
       />
+      <Link href="/SubmitBet/{num}/1" passHref>
+          here
+      </Link>
       <div class="mb-0 text-s text-gray-800">
         <table class="table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
@@ -48,14 +52,14 @@ const BetInterface3x2 = ({oddsdata, num}) => {
             </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 };
 
 const Description = ({ away_team, home_team, date }) => {
-  //const date_num = Date.parse(date);
+  //to update to account for local timezeone
   const day = new Date(date).getDate()
-  const month = new Date(date).getMonth()
+  const month = new Date(date).getMonth() + 1
   const hour = new Date(date).getHours()
   var mins = new Date(date).getMinutes()
   if (mins < 10) {
