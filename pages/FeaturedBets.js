@@ -1,3 +1,4 @@
+import useSWR from 'swr';
 import BetInterface3x2 from '../common/BetInterface3x2'
 import MLBdata from '../data/formatted.json'
 
@@ -17,25 +18,17 @@ const BetCard = ({ num, oddsdata }) => {
         </div>
     );
 };
-  
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 function FeaturedBets() {
+    const { data, error } = useSWR('/api/Odds', fetcher)
+
+    if (error) return <div>{error.message}</div>
+    if (!data) return <div>Loading...</div>
+
     return(
         <div class="container-fluid"> 
-
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800"> </h1>
-                <a href="#" class="btn btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-arrow-right"></i>
-                    </span>
-                    <span class="text">Invite Friends</span>
-                </a>
-            </div>
-
-            <div class="row justify-content-between mb-4 text-center">
-                <h1 class="h1 mb-0 text-gray-800 text-center">Bet Big No Vig</h1>
-            </div>
 
             <div class="row">
                 <div class="card shadow mb-4">
@@ -50,10 +43,10 @@ function FeaturedBets() {
                             
                             <div class="row">
 
-                                {[...Array(10)].map((x, i) =>
+                                {[...Array(4)].map((x, i) =>
                                     <BetCard 
                                         num={i} 
-                                        oddsdata = {MLBdata}
+                                        oddsdata = {data}
                                     />
                                 )}
 

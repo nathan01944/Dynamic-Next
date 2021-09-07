@@ -2,39 +2,74 @@ import Head from 'next/head'
 import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import useSWR from 'swr'
 //components
 import Sidebar from '../../../common/sidebar'
 import Topbar from '../../../common/Topbar'
 import Footer from '../../../common/footer'
 import BetInterface3x2 from '../../../common/BetInterface3x2'
-import MLBdata from '../../../data/formatted.json'
+//import oddsdata from '../../../data/formatted.json'
+
+
+// export async function getServerSideProps(context) {
+//   const res = await fetch('api/Odds')
+//   const data = await res.json()
+
+//   if (!data) {
+//       return{
+//           notFound: true,
+//       }
+//   }
+  
+//   return {
+//       data,
+//       notFound: false
+//   }
+// }
+
+// const fetcher = async (url) => {
+//   const res = await fetch(url)
+//   const data = await res.json()
+
+//   if (res.status !== 200) {
+//     throw new Error(data.message)
+//   }
+//   return data
+// }
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function SubmitBet() {
-    const router = useRouter()
-    //const {gameID,bettype} = router.query
-    const {
-        query: { gameID, bettype },
-      } = router
+  
 
-    //console.log(gameID*1)
-    console.log(gameID*1)
+  const router = useRouter()
+  const {
+      query: { gameID, bettype },
+    } = router
+  // const { data, error } = useSWR(
+  //   () => gameID && `/api/Odds/${gameID}`,
+  //   fetcher
+  // )
+  const { data, error } = useSWR('/api/Odds', fetcher)
 
-    const BetCard = ({ num, oddsdata }) => {
-        return (
-            <div class="col-xl-6 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <BetInterface3x2  
-                                num={num}
-                                oddsdata={oddsdata}
-                            />
-                        </div>
-                    </div>
-                </div>
+  if (error) return <div>{error.message}</div>
+  if (!data) return <div>Loading...</div>
+
+  const BetCard = ({ num, oddsdata }) => {
+    return (
+      <div class="col-xl-6 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <BetInterface3x2  
+                num={num}
+                oddsdata={oddsdata}
+              />
             </div>
-        );
-    };
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div >
@@ -51,15 +86,14 @@ export default function SubmitBet() {
             <div id="content">
               <div id="content-wrapper" class="d-flex flex-column">
                 <Topbar />
-                
               </div>
               
-              <div class="row container">
+              <div class="row container card-body justify-content-center">
                 <BetCard  
-                    num = {1}
-                    oddsdata={MLBdata}
+                    num = {gameID}
+                    oddsdata={data}
                 />
-                {MLBdata.away_team[gameID]}
+                
               </div>
               
             </div>

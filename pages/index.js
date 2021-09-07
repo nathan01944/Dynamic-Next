@@ -5,6 +5,7 @@ import FeaturedBets from './FeaturedBets'
 import Sidebar from '../common/sidebar'
 import Topbar from '../common/Topbar'
 import Footer from '../common/footer'
+import Description from './Description'
 
 export default function Home() {
   return (
@@ -22,8 +23,9 @@ export default function Home() {
             <div id="content">
               <div id="content-wrapper" class="d-flex flex-column">
                 <Topbar />
-                
+
               </div>
+              <Description />
               <FeaturedBets />
             </div>
           </div>
