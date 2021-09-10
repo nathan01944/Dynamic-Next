@@ -3,29 +3,34 @@ import Link from 'next/dist/client/link';
 //import oddsdata from '../../data/formatted.json'
 
 const BetInterface3x2 = ({oddsdata, num}) => {
+  const gamedata = JSON.parse(oddsdata.data.raw)
+  const keys = Object.keys(gamedata)
+  const game = gamedata[keys[0]]
+
+  console.log(keys[num])
+
   const game1 = [
     {
-      team: oddsdata.home_team[num],
-      h2h: addplus(oddsdata.odds[num].h2h_home),
-      spread: addplus(oddsdata.odds[num].spread_home_line) + ": " + addplus(oddsdata.odds[num].spread_home),
-      overunder: oddsdata.odds[num].totals_line + ": " + addplus(oddsdata.odds[num].totals_over) + "o",
+      team: game.home_team,
+      h2h: addplus(game.odds.h2h_home),
+      spread: addplus(game.odds.spread_home_line) + ": " + addplus(game.odds.spread_home),
+      overunder: game.odds.totals_line + ": " + addplus(game.odds.totals_over) + "o",
     },
     {
-      team: oddsdata.away_team[num],
-      h2h: addplus(oddsdata.odds[num].h2h_away),
-      spread: addplus(oddsdata.odds[num].spread_away_line) + ": " + addplus(oddsdata.odds[num].spread_away),
-      overunder: oddsdata.odds[num].totals_line + ": " + addplus(oddsdata.odds[num].totals_under) + "u",
+      team: game.away_team,
+      h2h: addplus(game.odds.h2h_away),
+      spread: addplus(game.odds.spread_away_line) + ": " + addplus(game.odds.spread_away),
+      overunder: game.odds.totals_line + ": " + addplus(game.odds.totals_under) + "u",
     }
   ]
 
-  const tmp = 1
 
   return (
     <div>
       <Description 
         home_team = {game1[0].team}
         away_team= {game1[1].team}
-        date={oddsdata.commence_time[num]}
+        date={game.commence_time[num]}
       />
 
       <Link
@@ -67,6 +72,7 @@ const BetInterface3x2 = ({oddsdata, num}) => {
         </table>
       </div>
     </div>
+    // <div>yes</div>
   );
 };
 
