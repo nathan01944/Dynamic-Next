@@ -7,7 +7,7 @@ import Footer from '../common/footer'
 import Description from './Description'
 import Redis from 'ioredis'
 import FeaturedBets2 from './FeaturedBets2'
-
+//evolve ancient taste bounce blouse member human message sight heavy spider shrimp worth solid near fever clog rubber truth slab cotton hard picture impose
 
 export default function Home(data) {
   //console.log(Object.keys(data));

@@ -94,10 +94,9 @@ def calc_odds(odds):
 
     return(odds_dict)
 
-#print(json.dumps(calc_odds(raw[4]['bookmakers'])))
 data = {}
 #for i in range(len(raw)):
-for i in range(4):
+for i in range(10):
     #game data
     game_id = raw[i]['id']
     home_team = raw[i]['home_team']

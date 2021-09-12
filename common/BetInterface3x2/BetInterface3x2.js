@@ -5,9 +5,7 @@ import Link from 'next/dist/client/link';
 const BetInterface3x2 = ({oddsdata, num}) => {
   const gamedata = JSON.parse(oddsdata.data.raw)
   const keys = Object.keys(gamedata)
-  const game = gamedata[keys[0]]
-
-  console.log(keys[num])
+  const game = gamedata[keys[num]]
 
   const game1 = [
     {
