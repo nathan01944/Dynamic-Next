@@ -1,3 +1,4 @@
+from os import SEEK_DATA
 import redis
 import json
 import pandas as pd
@@ -24,10 +25,19 @@ def to_pct_odds(odds_american):
     if odds_american > 0:
         odds = 100/(odds_american+100)
     elif odds_american < 0:
-        odds = odds_american/(odds_american+100)
+        odds = abs(odds_american)/(abs(odds_american)+100)
     else:
         odds = "nan"
     return(odds)
+
+def to_american_odds(odds_pct):
+    if odds_pct > 0.5:
+        odds_american = -100*odds_pct / (1-odds_pct)
+    elif odds_pct < 0.5:
+        odds_american = 100/odds_pct - 100
+    else:
+        odds_american = +100
+    return(odds_american)
 
 def calc_odds(odds):
     markets =[]
@@ -65,6 +75,9 @@ def calc_odds(odds):
     # h2h
     h2h_home = df[df['market']=='h2h']['home_price'].median()
     h2h_away = df[df['market']=='h2h']['away_price'].median()
+    h2h_home_equal = round(to_american_odds(
+        (to_pct_odds(h2h_home)+1-to_pct_odds(h2h_away))/2
+        ))
 
     # spread
     try:
@@ -72,25 +85,41 @@ def calc_odds(odds):
         spread_home = df[(df['market']=='spreads') & (df['home_line'].values==spread_home_line)]['home_price'].median()
         spread_away_line = -spread_home_line 
         spread_away = df[(df['market']=='spreads') & (df['home_line'].values==spread_home_line)]['away_price'].median()
+
+        spread_home_equal = round(to_american_odds(
+            (to_pct_odds(spread_home)+1-to_pct_odds(spread_away))/2
+            ))
     except:
         spread_home_line = "N/A"
         spread_home = "N/A"
         spread_away_line = "N/A"
         spread_away = "N/A"
 
+        spread_home_equal = "N/A"
+
     # totals
     try:
         totals_line = df[df['market']=='totals'].mode().loc[[0],'home_line'].values[0]
         totals_over = df[(df['market']=='totals') & (df['home_line'].values==totals_line)]['home_price'].median()
         totals_under = df[(df['market']=='totals') & (df['home_line'].values==totals_line)]['away_price'].median()
+
+        totals_over_equal = round(to_american_odds(
+            (to_pct_odds(totals_over)+1-to_pct_odds(totals_under))/2
+            ))
+
     except:
         totals_line = "N/A"
         totals_over = "N/A"
         totals_under = "N/A"
 
-    odds_dict = {'h2h_home': h2h_home,'h2h_away': h2h_away,
-    'spread_home_line': spread_home_line, 'spread_home': spread_home,'spread_away_line': spread_away_line,'spread_away': spread_away,
-    'totals_line': totals_line, 'totals_over': totals_over,'totals_under': totals_under}
+        totals_over_equal = "N/A"
+
+    # odds_dict = {'h2h_home': h2h_home,'h2h_away': h2h_away,
+    # 'spread_home_line': spread_home_line, 'spread_home': spread_home,'spread_away_line': spread_away_line,'spread_away': spread_away,
+    # 'totals_line': totals_line, 'totals_over': totals_over,'totals_under': totals_under}
+    odds_dict = {'h2h_home': h2h_home_equal,
+    'spread_home_line': spread_home_line, 'spread_home': spread_home_equal,
+    'totals_line': totals_line, 'totals_over': totals_over_equal}
 
     return(odds_dict)
 

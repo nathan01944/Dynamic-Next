@@ -22,7 +22,8 @@ const BetCard = ({ num, oddsdata }) => {
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 function FeaturedBets() {
-    const { data, error } = useSWR('/api/Odds', fetcher)
+    // const { data, error } = useSWR('/api/Odds', fetcher)
+    const { data, error } = useSWR('/api/Odds/houseodds', fetcher)
 
     if (error) return <div>{error.message}</div>
     if (!data) return <div>Loading...</div>

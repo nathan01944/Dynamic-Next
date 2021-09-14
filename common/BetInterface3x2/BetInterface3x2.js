@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Link from 'next/dist/client/link';
-//import oddsdata from '../../data/formatted.json'
 
 const BetInterface3x2 = ({oddsdata, num}) => {
   const gamedata = JSON.parse(oddsdata.data.raw)
@@ -12,13 +11,13 @@ const BetInterface3x2 = ({oddsdata, num}) => {
       team: game.home_team,
       h2h: addplus(game.odds.h2h_home),
       spread: addplus(game.odds.spread_home_line) + ": " + addplus(game.odds.spread_home),
-      overunder: game.odds.totals_line + ": " + addplus(game.odds.totals_over) + "o",
+      overunder: game.odds.totals_line + "o" + ": " + addplus(game.odds.totals_over),
     },
     {
       team: game.away_team,
-      h2h: addplus(game.odds.h2h_away),
-      spread: addplus(game.odds.spread_away_line) + ": " + addplus(game.odds.spread_away),
-      overunder: game.odds.totals_line + ": " + addplus(game.odds.totals_under) + "u",
+      h2h: addplus(-game.odds.h2h_home),
+      spread: addplus(-game.odds.spread_home_line) + ": " + addplus(-game.odds.spread_home),
+      overunder: game.odds.totals_line + "u" + ": " + addplus(-game.odds.totals_over),
     }
   ]
 
@@ -28,7 +27,7 @@ const BetInterface3x2 = ({oddsdata, num}) => {
       <Description 
         home_team = {game1[0].team}
         away_team= {game1[1].team}
-        date={game.commence_time[num]}
+        date={game.commence_time}
       />
 
       <Link
@@ -49,15 +48,27 @@ const BetInterface3x2 = ({oddsdata, num}) => {
             <thead>
                 <tr>
                     <th>Team</th>
-                    <th>Spread</th>
                     <th>Moneyline</th>
+                    <th>Spread</th>
                     <th>Over/Under</th>
                 </tr>
             </thead>
             <tbody>
-              {game1.map((data, key) => {
+              <Line
+                away = {0}
+                num = {0}
+                game = {game1}
+              />
+              <Line
+                away = {1}
+                num = {0}
+                game = {game1}
+              />
+
+
+              {/* {game1.map((data) => {
                 return (
-                  <Line
+                  <Line 
                     team={data.team}
                     h2h={data.h2h}
                     spread= {data.spread}
@@ -65,7 +76,7 @@ const BetInterface3x2 = ({oddsdata, num}) => {
                     num = {num}
                   />
                 );
-              })}
+              })} */}
             </tbody>
         </table>
       </div>
@@ -73,6 +84,7 @@ const BetInterface3x2 = ({oddsdata, num}) => {
     // <div>yes</div>
   );
 };
+
 
 const Description = ({ away_team, home_team, date }) => {
   const day = new Date(date).getDate()
@@ -88,26 +100,79 @@ const Description = ({ away_team, home_team, date }) => {
   return (
     <div>
       <div class="text-s font-weight-bold text-primary mb-1">
-        {home_team} vs {away_team}
+        {away_team} @ {home_team}
       </div>
       <div class="text-s font-weight-bold text-primary mb-1">
-        {month}/{day} @ {hour}:{mins}
+        {month}/{day} @ {hour}:{mins} EST
       </div>
     </div>
   );
 };
 
-const Line = ({ h2h, team, spread, overunder,num }) => {
-  if (!h2h) return <div />;
+const Line = ({ away , num, game }) => {
+  if (!game) return <tr />;
   return (
     <tr>
-      <td>{team}</td>
-      <td>{spread}</td>
-      <td>{h2h}</td>
-      <td>{overunder}</td>
+      <td>{game[away]["team"]}</td>
+      <CellButton 
+        away={away}
+        type={"h2h"}
+        num={num}
+        game={game}
+      />
+      <CellButton 
+        away={away}
+        type={"spread"}
+        num={num}
+        game={game}
+      />
+      <CellButton 
+        away={away}
+        type={"overunder"}
+        num={num}
+        game={game}
+      />
     </tr>
   );
 };
+
+const CellButton = ({ away, type, num, game }) => {
+  const typestring = type.toString()
+  console.log()
+  if (!type) return <td />;
+  return (
+    <td>
+      <button>
+        <Link
+            href={{
+                pathname: "/SubmitBet/[gameID]/[bettype]",
+                query: {
+                    gameID: {num},
+                    bettype: 1
+                }
+            }}
+            as={`/SubmitBet/${num}/1`}
+        passHref>
+          {game[away][type]}
+        </Link>
+      </button>
+    </td>
+  );
+};
+
+
+
+// const Line = ({ h2h, team, spread, overunder,num }) => {
+//   if (!h2h) return <tr />;
+//   return (
+//     <tr>
+//       <td>{team}</td>
+//       <td>{spread}</td>
+//       <td>{h2h}</td>
+//       <td>{overunder}</td>
+//     </tr>
+//   );
+// };
 
 function addplus(oddsnum) {
   if (oddsnum < 0) {

@@ -49,7 +49,7 @@ export default function SubmitBet() {
   //   () => gameID && `/api/Odds/${gameID}`,
   //   fetcher
   // )
-  const { data, error } = useSWR('/api/Odds', fetcher)
+  const { data, error } = useSWR('/api/Odds/houseodds', fetcher)
 
   if (error) return <div>{error.message}</div>
   if (!data) return <div>Loading...</div>

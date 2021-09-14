@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import BetInterface3x2 from '../common/BetInterface3x2'
-import MLBdata from '../data/formatted.json'
+// import MLBdata from '../data/formatted.json'
 
 const BetCard = ({ num, oddsdata }) => {
     return (

@@ -1,26 +1,26 @@
-function HouseWinnings() {
-    return (
-        <div class= "justify-content-center">
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-success shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Total House Profits Returned To Bettors</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$100</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+// function HouseWinnings() {
+//     return (
+//         <div class= "justify-content-center">
+//             <div class="col-xl-3 col-md-6 mb-4">
+//                 <div class="card border-left-success shadow h-100 py-2">
+//                     <div class="card-body">
+//                         <div class="row no-gutters align-items-center">
+//                             <div class="col mr-2">
+//                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+//                                     Total House Profits Returned To Bettors</div>
+//                                 <div class="h5 mb-0 font-weight-bold text-gray-800">$100</div>
+//                             </div>
+//                             <div class="col-auto">
+//                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
         
-    )
-}
+//     )
+// }
 
 function Description() {
     return (
@@ -44,10 +44,10 @@ function Description() {
             </div>
 
             <div class="row mb-4 text-center justify-content-center">
-                <h4 class="h4 mb-0 text-gray-800 justify-content-center">Each Month the House Returns its Profits to the Bettors!</h4>
+                <h4 class="h4 mb-0 text-gray-800 justify-content-center">Bet in Solana and get paid in Solana (Ethereum Coming Soon!)</h4>
             </div>
 
-            <HouseWinnings />
+            {/* <HouseWinnings /> */}
         </div>
     )
     
