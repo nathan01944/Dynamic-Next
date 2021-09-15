@@ -137,8 +137,6 @@ const Line = ({ away , num, game }) => {
 };
 
 const CellButton = ({ away, type, num, game }) => {
-  const typestring = type.toString()
-  console.log()
   if (!type) return <td />;
   return (
     <td>
