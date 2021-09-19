@@ -30,27 +30,14 @@ const BetInterface3x2 = ({oddsdata, num}) => {
         date={game.commence_time}
       />
 
-      <Link
-          href={{
-              pathname: "/SubmitBet/[gameID]/[bettype]",
-              query: {
-                  gameID: {num},
-                  bettype: 1
-              }
-          }}
-          as={`/SubmitBet/${num}/1`}
-      passHref>
-          here
-      </Link>
-
       <div class="mb-0 text-s text-gray-800">
-        <table class="table-bordered" id="dataTable" width="100%" cellSpacing="10">
+        <table class="table-bordered th col-md-12" id="dataTable" width="100%" cellSpacing="10">
             <thead>
                 <tr>
-                    <th>Team</th>
-                    <th>Moneyline</th>
-                    <th>Spread</th>
-                    <th>Over/Under</th>
+                    <th class="font-weight-medium bg-gray-600 text-gray-100 col-md-3">Team</th>
+                    <th class="font-weight-medium bg-gray-600 text-gray-100 col-md-2">Moneyline</th>
+                    <th class="font-weight-medium bg-gray-600 text-gray-100 col-md-2">Spread</th>
+                    <th class="font-weight-medium bg-gray-600 text-gray-100 col-md-2">Over/Under</th>
                 </tr>
             </thead>
             <tbody>
@@ -99,10 +86,10 @@ const Description = ({ away_team, home_team, date }) => {
 
   return (
     <div>
-      <div class="text-s font-weight-bold text-primary mb-1">
+      <div class="text-s font-weight-bold text-gray-800 mb-1">
         {away_team} @ {home_team}
       </div>
-      <div class="text-s font-weight-bold text-primary mb-1">
+      <div class="text-s font-weight-bold text-gray-800 mb-1">
         {month}/{day} @ {hour}:{mins} EST
       </div>
     </div>
@@ -140,7 +127,7 @@ const CellButton = ({ away, type, num, game }) => {
   if (!type) return <td />;
   return (
     <td>
-      <button>
+      <button class="btn">
         <Link
             href={{
                 pathname: "/SubmitBet/[gameID]/[bettype]",
@@ -157,20 +144,6 @@ const CellButton = ({ away, type, num, game }) => {
     </td>
   );
 };
-
-
-
-// const Line = ({ h2h, team, spread, overunder,num }) => {
-//   if (!h2h) return <tr />;
-//   return (
-//     <tr>
-//       <td>{team}</td>
-//       <td>{spread}</td>
-//       <td>{h2h}</td>
-//       <td>{overunder}</td>
-//     </tr>
-//   );
-// };
 
 function addplus(oddsnum) {
   if (oddsnum < 0) {
