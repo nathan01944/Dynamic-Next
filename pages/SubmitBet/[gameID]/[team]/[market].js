@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import React from 'react'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 //components
@@ -49,9 +48,8 @@ export default function SubmitBet() {
                 />
               </div>
               
-              <div class="row container-fluid"> 
-                <currentOffers  
-                  gameID = {gameID}
+              <div class="row container"> 
+                <currentOffers
                 />
               </div>
             </div>
