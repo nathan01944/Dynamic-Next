@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import Link from 'next/dist/client/link';
 
-const BetInterface3x2 = ({oddsdata, num}) => {
+const BetInterface3x2 = ({oddsdata, gameID, market, team}) => {
   const gamedata = JSON.parse(oddsdata.data.raw)
-  const keys = Object.keys(gamedata)
-  const game = gamedata[keys[num]]
+  const game = gamedata[gameID]
 
   const game1 = [
     {
@@ -43,32 +42,21 @@ const BetInterface3x2 = ({oddsdata, num}) => {
             <tbody>
               <Line
                 away = {0}
-                num = {0}
+                gameID = {gameID}
                 game = {game1}
+                lineHighlight = {team == 0 ? market : ""}
               />
               <Line
                 away = {1}
-                num = {0}
+                gameID = {gameID}
                 game = {game1}
+                lineHighlight = {""}
+                lineHighlight = {team == 1 ? market : ""}
               />
-
-
-              {/* {game1.map((data) => {
-                return (
-                  <Line 
-                    team={data.team}
-                    h2h={data.h2h}
-                    spread= {data.spread}
-                    overunder={data.overunder}
-                    num = {num}
-                  />
-                );
-              })} */}
             </tbody>
         </table>
       </div>
     </div>
-    // <div>yes</div>
   );
 };
 
@@ -96,60 +84,64 @@ const Description = ({ away_team, home_team, date }) => {
   );
 };
 
-const Line = ({ away , num, game }) => {
+const Line = ({ away , gameID, game, lineHighlight }) => {
   if (!game) return <tr />;
   return (
     <tr>
       <td>{game[away]["team"]}</td>
       <CellButton 
         away={away}
-        type={"h2h"}
-        num={num}
+        market={"h2h"}
+        gameID={gameID}
         game={game}
+        cellhighlight = {lineHighlight == "h2h" ? 1 : 0}
       />
       <CellButton 
         away={away}
-        type={"spread"}
-        num={num}
+        market={"spread"}
+        gameID={gameID}
         game={game}
+        cellhighlight = {lineHighlight == "spread" ? 1 : 0}
       />
       <CellButton 
         away={away}
-        type={"overunder"}
-        num={num}
+        market={"overunder"}
+        gameID={gameID}
         game={game}
+        cellhighlight = {lineHighlight == "overunder" ? 1 : 0}
       />
     </tr>
   );
 };
 
-const CellButton = ({ away, type, num, game }) => {
-  if (!type) return <td />;
+const CellButton = ({ away, market, gameID, game, cellhighlight }) => {
+  if (!market) return <td />;
   return (
-    <td>
+    <td class={cellhighlight === 1 ? "bg-gray-300" : ""}>
       <button class="btn">
         <Link
             href={{
-                pathname: "/SubmitBet/[gameID]/[bettype]",
+                pathname: "/SubmitBet/[gameID]/[team]/[market]",
                 query: {
-                    gameID: {num},
-                    bettype: 1
+                    gameID: {gameID},
+                    team: away == 0 ? "home" : "away",
+                    market: market
                 }
             }}
-            as={`/SubmitBet/${num}/1`}
+            as={`/SubmitBet/${gameID}/${away}/${market}`}
         passHref>
-          {game[away][type]}
+          {game[away][market]}
         </Link>
       </button>
     </td>
   );
 };
 
-function addplus(oddsnum) {
-  if (oddsnum < 0) {
-    var oddsstring = oddsnum.toString()
+function addplus(oddsgameID) {
+  if (oddsgameID < 0) {
+    var oddsstring = oddsgameID.toString()
   } else {
-    var oddsstring = "+" + oddsnum.toString()
+    var oddsstring = "+" + oddsgameID.toString()
   }
   return (oddsstring)
 }
