@@ -7,7 +7,8 @@ import Sidebar from '../../../../common/sidebar'
 import Topbar from '../../../../common/Topbar'
 import Footer from '../../../../common/footer'
 import SubmitBetCard from './SubmitBetCard'
-import currentOffers from './currentOffers'
+import MakeOffer from './MakeOffer'
+import TakeOffer from './TakeOffer'
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -39,7 +40,7 @@ export default function SubmitBet() {
                 <Topbar />
               </div>
               
-              <div class="row container card-body justify-content-center">
+              <div class="row container card-body justify-content-center p-3">
                 <SubmitBetCard  
                     gameID = {gameID}
                     oddsdata={data}
@@ -48,10 +49,18 @@ export default function SubmitBet() {
                 />
               </div>
               
-              <div class="row container"> 
-                <currentOffers
-                />
+              <div class="row">
+                <div class="col-lg-6 p-0 pb-3">
+                  <TakeOffer />
+                </div>
+
+                <div class="col-lg-6 p-0 pb-3">
+                  <MakeOffer />
+                </div>
+
               </div>
+
+              
             </div>
           </div>
         </div>
