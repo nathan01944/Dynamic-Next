@@ -1,4 +1,4 @@
-import BetInterface3x2 from '../../../../common/BetInterface3x2'
+import BetInterface3x2 from '.'
 
 const SubmitBetCard = ({ gameID, oddsdata, market, team }) => {
     return (

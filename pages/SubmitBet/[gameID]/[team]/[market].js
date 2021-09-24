@@ -6,7 +6,7 @@ import useSWR from 'swr'
 import Sidebar from '../../../../common/sidebar'
 import Topbar from '../../../../common/Topbar'
 import Footer from '../../../../common/footer'
-import SubmitBetCard from './SubmitBetCard'
+import SubmitBetCard from '../../../../common/BetInterface3x2/SubmitBetCard'
 import MakeOffer from './MakeOffer'
 import TakeOffer from './TakeOffer'
 
@@ -52,7 +52,12 @@ export default function market() {
               
               <div class="row">
                 <div class="col-lg-6 p-0 pb-3">
-                  <TakeOffer />
+                  <TakeOffer 
+                    gameID = {gameID}
+                    oddsdata = {data.offersdata}
+                    market = {market}
+                    team = {team}
+                  />
                 </div>
 
                 <div class="col-lg-6 p-0 pb-3">

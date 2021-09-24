@@ -81,27 +81,15 @@ const MakeOfferTable = ({ gameID, oddsdata, market, team }) => {
   const datakeys = Object.keys(filteredoffers);
   const numBets = datakeys.length
 
-  // let MakeOfferRowsProps = {}
-  // MakeOfferRowsProps.data = filteredoffers
-  // MakeOfferRowsProps.team = "henry"
-
   return (
     <div class="text-gray-800 col-md-12 justify-content-center">
       <table class="table-bordered th" id="dataTable" width="100%" cellSpacing="20">
           <thead>
-              {/* <tr>
-                  <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Team</th>
-                  <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Odds</th>
-                  <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Wager</th>
-              </tr> */}
               <TableHeader 
                 market = {market}
               />
           </thead>
           <tbody class="text-gray-600">
-            {/* {console.log(filteredoffers[datakeys[1]])} */}
-            {/* {offerRow(
-              filteredoffers[datakeys[1]]["team"],filteredoffers[datakeys[1]]["team"])} */}
             {[...Array(numBets)].map((x, i) =>
                 <OfferRow 
                   data={filteredoffers} 

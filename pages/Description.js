@@ -43,10 +43,6 @@ function Description() {
                 <h3 class="h3 mb-0 text-gray-800 justify-content-center">The House Never Wins</h3>
             </div>
 
-            <div class="row mb-4 text-center justify-content-center">
-                <h4 class="h4 mb-0 text-gray-800 justify-content-center">Bet in Solana and get paid in Solana (Ethereum Coming Soon!)</h4>
-            </div>
-
             {/* <HouseWinnings /> */}
         </div>
     )

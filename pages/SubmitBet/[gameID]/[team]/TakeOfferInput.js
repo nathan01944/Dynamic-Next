@@ -9,9 +9,9 @@ let TakeOfferInput = ({ gameID, oddsdata, market, team }) => {
       <form class="p-0">  
           <div class="form-group row">
               <div class="col-sm-3 pr-0">
-                  <div class="text-gray-800 pl-2">Amt to Risk</div>
+                  <div class="text-gray-800 pl-2">Wager</div>
                   <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                      placeholder="Risk" />
+                      placeholder="Wager" />
               </div>
               <div class="col-sm-3 pr-0">
                 <div class="text-gray-800 pl-2">Odds </div>

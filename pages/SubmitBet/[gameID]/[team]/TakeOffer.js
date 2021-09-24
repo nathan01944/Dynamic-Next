@@ -9,7 +9,7 @@ const TakeOffer = ({ gameID, oddsdata, market, team }) => {
 
         <a href="" class="d-block card-header py-3" data-toggle="collapse"
             role="button" aria-expanded="true" aria-controls="collapseCardExample">
-            <h6 class="m-0 font-weight-bold text-primary">Take Offers</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Execute Order (Take Offer)</h6>
         </a>
 
         <div class="collapse show" id="collapseCardExample">
@@ -22,7 +22,12 @@ const TakeOffer = ({ gameID, oddsdata, market, team }) => {
               Available Offers
             </div>
 
-            <TakeOfferTable />
+            <TakeOfferTable 
+              oddsdata = {oddsdata}
+              market = {market}
+              team = {team}
+              gameID = {gameID}
+            />
 
           </div>
         </div>
