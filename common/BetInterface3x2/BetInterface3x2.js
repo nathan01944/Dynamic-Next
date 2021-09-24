@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import Link from 'next/dist/client/link';
 
 const BetInterface3x2 = ({oddsdata, gameID, market, team}) => {
-  const gamedata = JSON.parse(oddsdata.data.raw)
-  const game = gamedata[gameID]
+  // const gamedata = JSON.parse(oddsdata.data.raw)
+  // const game = gamedata[gameID]
+
+  //const gamedata = JSON.parse(oddsdata.data.raw)
+  const game = oddsdata[gameID]
 
   const game1 = [
     {

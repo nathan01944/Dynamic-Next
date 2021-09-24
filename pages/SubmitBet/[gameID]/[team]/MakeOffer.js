@@ -1,7 +1,9 @@
 import MakeOfferInput from "./MakeOfferInput";
 import MakeOfferTable from "./MakeOfferTable";
 
+
 const MakeOffer = ({ gameID, oddsdata, market, team }) => {
+  
   return (
     <div class="container-fluid"> 
 
@@ -21,7 +23,9 @@ const MakeOffer = ({ gameID, oddsdata, market, team }) => {
             <div class="text-gray-800 font-weight-bold pl-3 pb-2">
               Competing Offers
             </div>
-            <MakeOfferTable />
+            <MakeOfferTable 
+              oddsdata = {oddsdata}
+            />
 
           </div>
         </div>

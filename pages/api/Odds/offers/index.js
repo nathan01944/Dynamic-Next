@@ -15,7 +15,8 @@ export default async (req, res) => {
    let result = {}
    if (marketodds) {
        console.log("loading from cache")
-       result.data = HouseAndUserOffers
+       result.offersdata = HouseAndUserOffers
+       result.marketodds = marketodds
        result.type = "redis"
        result.latency = Date.now() - start;
        result.latencyredis = latencyredis

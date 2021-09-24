@@ -25,3 +25,15 @@ export function american_to_pct_odds(odds_american) {
     }
     return(odds)
 }
+
+export function addplus(number) {
+    if (number < 0) {
+      var oddsstring = number.toString()
+    } else if (number > 0) {
+      var oddsstring = "+" + number.toString()
+    }
+    else {
+        var oddsstring = null
+    }
+    return (oddsstring)
+  }
