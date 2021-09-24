@@ -16,8 +16,7 @@ function findGameByID(data, gameID,home,market) {
   return filtered
 }
 
-function OfferRow2({data,datakeys,i,market}) {
-  console.log(data[datakeys[i]])
+function OfferRow({data,datakeys,i,market}) {
   if (market == "h2h") return (
     <tr>
       <td class="p-2"> {data[datakeys[i]]["team"]}</td>
@@ -35,7 +34,7 @@ function OfferRow2({data,datakeys,i,market}) {
   )
   else if (market == "total") return (
     <tr>
-      <td class="p-2"> {data[datakeys[i]]["team"]}</td>
+      <td class="p-2"> {data[datakeys[i]]["team"] + " " + data[datakeys[i]]["line"]}</td>
       <td class="p-2"> {addplus(data[datakeys[i]]["odds"])}</td>
       <td class="p-2"> {data[datakeys[i]]["wager"]}</td>
   </tr>
@@ -74,9 +73,8 @@ function TableHeader({data,datakeys,i,market}) {
 }
 
 
-const MakeOfferTable = ({ gameID, oddsdata, market, home }) => {
-  home = "away"
-  market = "total"
+const MakeOfferTable = ({ gameID, oddsdata, market, team }) => {
+  let home = (team == 0) ? "home" : "away"
   gameID = "683a81f7a04ef99d7016476829682b6c"
 
   let filteredoffers = findGameByID(oddsdata,gameID,home,market)
@@ -105,7 +103,7 @@ const MakeOfferTable = ({ gameID, oddsdata, market, home }) => {
             {/* {offerRow(
               filteredoffers[datakeys[1]]["team"],filteredoffers[datakeys[1]]["team"])} */}
             {[...Array(numBets)].map((x, i) =>
-                <OfferRow2 
+                <OfferRow 
                   data={filteredoffers} 
                   datakeys = {datakeys}
                   i = {i}

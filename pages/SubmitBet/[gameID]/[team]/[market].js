@@ -57,10 +57,10 @@ export default function market() {
 
                 <div class="col-lg-6 p-0 pb-3">
                   <MakeOffer 
-                    gameID = "683a81f7a04ef99d7016476829682b6c"
+                    gameID = {gameID}
                     oddsdata = {data.offersdata}
-                    market = "h2h"
-                    team = "home"
+                    market = {market}
+                    team = {team}
                   />
                 </div>
 

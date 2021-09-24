@@ -13,13 +13,13 @@ const BetInterface3x2 = ({oddsdata, gameID, market, team}) => {
       team: game.home_team,
       h2h: addplus(game.odds.h2h_home),
       spread: addplus(game.odds.spread_home_line) + ": " + addplus(game.odds.spread_home),
-      overunder: game.odds.totals_line + "o" + ": " + addplus(game.odds.totals_over),
+      total: game.odds.totals_line + "o" + ": " + addplus(game.odds.totals_over),
     },
     {
       team: game.away_team,
       h2h: addplus(-game.odds.h2h_home),
       spread: addplus(-game.odds.spread_home_line) + ": " + addplus(-game.odds.spread_home),
-      overunder: game.odds.totals_line + "u" + ": " + addplus(-game.odds.totals_over),
+      total: game.odds.totals_line + "u" + ": " + addplus(-game.odds.totals_over),
     }
   ]
 
@@ -108,10 +108,10 @@ const Line = ({ away , gameID, game, lineHighlight }) => {
       />
       <CellButton 
         away={away}
-        market={"overunder"}
+        market={"total"}
         gameID={gameID}
         game={game}
-        cellhighlight = {lineHighlight == "overunder" ? 1 : 0}
+        cellhighlight = {lineHighlight == "total" ? 1 : 0}
       />
     </tr>
   );

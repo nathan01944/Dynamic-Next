@@ -26,7 +26,7 @@ export default function CreateOffer(game,vig,wager,market) {
     offerhome.market = market
     offerhome.offerID = "000000" + "-" + Date.now().toString() + "-" + Math.random().toString(10).substr(2)
     offerhome.home = "home"
-    offerhome.team = game.home_team
+    offerhome.team = (market=="total") ? "Over" : game.home_team
     offerhome.odds = Math.round(pct_to_american_odds(american_to_pct_odds(mktodds) + vig))
     offerhome.line = line_home
     offerhome.wager = wager
@@ -36,8 +36,8 @@ export default function CreateOffer(game,vig,wager,market) {
     offeraway.market = market
     offeraway.offerID = "000000" + "-" + Date.now().toString() + "-" + Math.random().toString(10).substr(2)
     offeraway.home = "away"
-    offeraway.team = game.away_team
-    offeraway.odds = Math.round(pct_to_american_odds(1-american_to_pct_odds(game.odds.h2h_home) + vig))
+    offeraway.team = (market=="total") ? "Under" : game.away_team 
+    offeraway.odds = Math.round(pct_to_american_odds(1-american_to_pct_odds(mktodds) + vig))
     offeraway.line = line_away
     offeraway.wager = wager
 

@@ -25,6 +25,9 @@ const MakeOffer = ({ gameID, oddsdata, market, team }) => {
             </div>
             <MakeOfferTable 
               oddsdata = {oddsdata}
+              market = {market}
+              team = {team}
+              gameID = {gameID}
             />
 
           </div>
