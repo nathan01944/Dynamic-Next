@@ -4,7 +4,7 @@ let redis = new Redis("rediss://:1ab8f665ce744567ba3c4ee12ed4c869@us1-upward-lio
 
 export default async (req, res) => {
    let start = Date.now();
-   let cache = await redis.hgetall("odds")
+   let cache = await redis.hgetall("marketodds")
    let result = {}
    if (cache) {
        console.log("loading from cache")

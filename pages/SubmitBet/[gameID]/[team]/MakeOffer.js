@@ -9,7 +9,7 @@ const MakeOffer = ({ gameID, oddsdata, market, team }) => {
 
         <a href="" class="d-block card-header py-3" data-toggle="collapse"
             role="button" aria-expanded="true" aria-controls="collapseCardExample">
-            <h6 class="m-0 font-weight-bold text-primary">Mxake Offers</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Make Offers</h6>
         </a>
 
         <div class="collapse show" id="collapseCardExample">

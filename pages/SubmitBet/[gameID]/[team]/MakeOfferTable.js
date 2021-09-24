@@ -6,7 +6,7 @@ const MakeOfferTable = ({ gameID, oddsdata, market, team }) => {
               <tr>
                   <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">User</th>
                   <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Odds</th>
-                  <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Amount</th>
+                  <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Wager</th>
               </tr>
           </thead>
           <tbody class="text-gray-600">

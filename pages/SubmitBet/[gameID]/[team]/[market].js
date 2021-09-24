@@ -18,7 +18,8 @@ export default function SubmitBet() {
       query: { gameID, market, team },
     } = router
 
-  const { data, error } = useSWR('/api/Odds/houseodds', fetcher)
+  const { data, error } = useSWR('/api/Odds/marketodds', fetcher)
+  //const { offersData, offersError } = useSWR('/api/Odds/offers', fetcher)
 
   if (error) return <div>{error.message}</div>
   if (!data) return <div>Loading...</div>

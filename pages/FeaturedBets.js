@@ -22,7 +22,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 
 function FeaturedBets() {
     // const { data, error } = useSWR('/api/Odds', fetcher)
-    const { data, error } = useSWR('/api/Odds/houseodds', fetcher)
+    const { data, error } = useSWR('/api/Odds/marketodds', fetcher)
 
     if (error) return <div>{error.message}</div>
     if (!data) return <div>Loading...</div>
@@ -44,7 +44,7 @@ function FeaturedBets() {
                             
                             <div class="row">
 
-                                {[...Array(4)].map((x, i) =>
+                                {[...Array(6)].map((x, i) =>
                                     <BetCard 
                                         gameID={Object.keys(JSON.parse(data.data.raw))[i]} 
                                         oddsdata = {data}

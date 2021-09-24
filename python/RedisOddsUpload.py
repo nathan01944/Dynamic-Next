@@ -11,15 +11,6 @@ password= '1ab8f665ce744567ba3c4ee12ed4c869', ssl=True)
 
 with open('data//rawOutAPI.json', 'r') as infile:
     raw = json.load(infile)
-    #rawpd = pd.read_json(infile)
-
-#odds1 = rawpd.loc[[0],'bookmakers']
-#df = pd.concat({k: pd.DataFrame(v) for k, v in rawpd.items()}, axis=1)
-
-odds1 = raw[0]['bookmakers']
-tmp1 = odds1[0]['markets']
-tmp2 = tmp1[1]['outcomes']
-#print(tmp2[1])
 
 def to_pct_odds(odds_american):
     if odds_american > 0:
@@ -35,11 +26,13 @@ def to_american_odds(odds_pct):
         odds_american = -100*odds_pct / (1-odds_pct)
     elif odds_pct < 0.5:
         odds_american = 100/odds_pct - 100
+    elif odds_pct == "nan":
+        odds_american = "nan"
     else:
         odds_american = +100
     return(odds_american)
 
-def calc_odds(odds):
+def calc_odds(odds, home_team):
     markets =[]
     home_prices =[]
     homes_lines =[]
@@ -51,16 +44,37 @@ def calc_odds(odds):
             market = tmp1[k]['key']
             tmp2 = tmp1[k]['outcomes']
             for l in range(len(tmp2)):
-                home_price = tmp2[0]['price']
-                try:
-                    home_line = tmp2[0]['point']
-                except:
+                if home_team == tmp2[1]['name'] or tmp2[1]['name'] == "Under":
+                    home_i = 1
+                    home_price = tmp2[home_i]['price']
+                    try:
+                        home_line = tmp2[home_i]['point']
+                    except:
+                        home_line = 'N/A'
+                    away_price = tmp2[1-home_i]['price']
+                    try:
+                        away_line = tmp2[1-home_i]['point']
+                    except:
+                        away_line = 'N/A'
+                elif home_team == tmp2[0]['name'] or tmp2[0]['name'] == "Under":
+                    home_i = 0
+                    home_price = tmp2[home_i]['price']
+                    try:
+                        home_line = tmp2[home_i]['point']
+                    except:
+                        home_line = 'N/A'
+                    away_price = tmp2[1-home_i]['price']
+                    try:
+                        away_line = tmp2[1-home_i]['point']
+                    except:
+                        away_line = 'N/A'
+                else:
+                    print(home_team, tmp2[1]['name'])
+                    home_price = 'N/A'
                     home_line = 'N/A'
-                away_price = tmp2[1]['price']
-                try:
-                    away_line = tmp2[1]['point']
-                except:
+                    away_price = 'N/A'
                     away_line = 'N/A'
+
 
                 #append
                 markets.append(market)
@@ -76,7 +90,7 @@ def calc_odds(odds):
     h2h_home = df[df['market']=='h2h']['home_price'].median()
     h2h_away = df[df['market']=='h2h']['away_price'].median()
     h2h_home_equal = round(to_american_odds(
-        (to_pct_odds(h2h_home)+1-to_pct_odds(h2h_away))/2
+        (to_pct_odds(h2h_home) + 1 - to_pct_odds(h2h_away))/2
         ))
 
     # spread
@@ -124,8 +138,7 @@ def calc_odds(odds):
     return(odds_dict)
 
 data = {}
-#for i in range(len(raw)):
-for i in range(10):
+for i in range(len(raw)):
     #game data
     game_id = raw[i]['id']
     home_team = raw[i]['home_team']
@@ -135,9 +148,9 @@ for i in range(10):
         sport_title = raw[i]['sport_key']
     away_team = raw[i]['away_team']
     commence_time = raw[i]['commence_time']
-    odd = calc_odds(raw[i]['bookmakers'])
+    odd = calc_odds(raw[i]['bookmakers'],home_team)
 
     data[game_id] = {'game_id': game_id,'sport_title': sport_title,'home_team': home_team,'away_team': away_team,'commence_time': commence_time,'odds': odd}   
 
-r.hset('odds','raw',json.dumps(data))
-print(r.hgetall('odds'))
+r.hset('marketodds','raw',json.dumps(data))
+print(r.hgetall('marketodds'))
