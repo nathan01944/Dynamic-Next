@@ -25,7 +25,7 @@ function FeaturedBets() {
                     <div class="collapse show" id="collapseCardExample">
                         <div class="card-body">
                             
-                            <div class="row">
+                            <div class="row p-1">
 
                                 {[...Array(6)].map((x, i) =>
                                     <SubmitBetCard  

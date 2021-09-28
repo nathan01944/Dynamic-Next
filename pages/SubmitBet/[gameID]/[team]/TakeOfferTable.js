@@ -49,7 +49,8 @@ function TableHeader({data,datakeys,i,market}) {
     <tr>
       <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Team</th>
       <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Odds</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Wager</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Your Wager</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Their Wager</th>
     </tr>
   )
   else if (market == "spread") return (

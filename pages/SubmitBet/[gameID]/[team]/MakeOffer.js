@@ -1,9 +1,9 @@
-import MakeOfferInput from "./MakeOfferInput";
+import OfferInput from "./Common/OfferInput";
 import MakeOfferTable from "./MakeOfferTable";
 
 const MakeOffer = ({ gameID, oddsdata, market, team }) => {
   return (
-    <div class="container-fluid"> 
+    <div class="container-fluid col-lg-6 pl-2"> 
 
       <div class="card shadow mb-6">
 
@@ -16,7 +16,7 @@ const MakeOffer = ({ gameID, oddsdata, market, team }) => {
           <div class="card-body">
 
             
-            <MakeOfferInput />
+            <OfferInput />
 
             <div class="text-gray-800 font-weight-bold pl-3 pb-2">
               Competing Offers

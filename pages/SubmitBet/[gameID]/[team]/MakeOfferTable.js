@@ -1,6 +1,6 @@
 import { addplus } from "../../../../common/oddsMath";
 
-function findGameByID(data, gameID,home,market) {
+function findGame(data, gameID,home,market) {
   //to add sort
   let filtered = {}
   const datakeys = Object.keys(data);
@@ -16,59 +16,75 @@ function findGameByID(data, gameID,home,market) {
   return filtered
 }
 
+function LineRow({market, line}) {
+  if (market=="spread") {
+    return (
+      <td class="p-2"> {line} </td>
+    )
+  }
+  else { 
+    return (
+      null
+    )
+  }
+}
+
+function OverUnderTeam({market, team, line}) {
+  if (market=="total") {
+    return (
+      <td class="p-2"> {team} {line}</td>
+    )
+  }
+  else { 
+    return (
+      <td class="p-2"> {team}</td>
+    )
+  }
+}
+
 function OfferRow({data,datakeys,i,market}) {
-  if (market == "h2h") return (
+  return (
     <tr>
-      <td class="p-2"> {data[datakeys[i]]["team"]}</td>
+      {/* <td class="p-2"> {data[datakeys[i]]["team"]}</td> */}
+      <OverUnderTeam 
+        market = {market}
+        line = {data[datakeys[i]]["line"]}
+        team = {data[datakeys[i]]["team"]}
+      />
       <td class="p-2"> {addplus(data[datakeys[i]]["odds"])}</td>
+      <LineRow
+        market = {market}
+        line =  {addplus(data[datakeys[i]]["line"])}
+      />
       <td class="p-2"> {data[datakeys[i]]["wager"]}</td>
     </tr>
   )
-  else if (market == "spread") return (
-    <tr>
-      <td class="p-2"> {data[datakeys[i]]["team"]}</td>
-      <td class="p-2"> {addplus(data[datakeys[i]]["line"])} </td>
-      <td class="p-2"> {addplus(data[datakeys[i]]["odds"])}</td>
-      <td class="p-2"> {data[datakeys[i]]["wager"]}</td>
-    </tr>
-  )
-  else if (market == "total") return (
-    <tr>
-      <td class="p-2"> {data[datakeys[i]]["team"] + " " + data[datakeys[i]]["line"]}</td>
-      <td class="p-2"> {addplus(data[datakeys[i]]["odds"])}</td>
-      <td class="p-2"> {data[datakeys[i]]["wager"]}</td>
-  </tr>
-  )
-  else return (
-    <tr></tr>
-  )
+
+}
+
+function SpreadHeader({market}) {
+  if (market=="spread") {
+    return (
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Line</th>
+    )
+  }
+  else { 
+    return (
+      null
+    )
+  }
 }
 
 function TableHeader({data,datakeys,i,market}) {
-  if (market == "h2h") return (
+  return (
     <tr>
       <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Team</th>
+      <SpreadHeader 
+        market = {market} 
+      />
       <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Odds</th>
       <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Wager</th>
     </tr>
-  )
-  else if (market == "spread") return (
-    <tr>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Team</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Line</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Odds</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Wager</th>
-    </tr>
-  )
-  else if (market == "total") return (
-    <tr>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Over/Under</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Odds</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Wager</th>
-    </tr>
-  )
-  else return (
-    <tr> </tr>
   )
 }
 
@@ -77,7 +93,7 @@ const MakeOfferTable = ({ gameID, oddsdata, market, team }) => {
   let home = (team == 0) ? "home" : "away"
   gameID = "683a81f7a04ef99d7016476829682b6c"
 
-  let filteredoffers = findGameByID(oddsdata,gameID,home,market)
+  let filteredoffers = findGame(oddsdata,gameID,home,market)
   const datakeys = Object.keys(filteredoffers);
   const numBets = datakeys.length
 
