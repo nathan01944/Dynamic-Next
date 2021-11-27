@@ -14,16 +14,22 @@ export function pct_to_american_odds(odds_pct) {
 }
 
 export function american_to_pct_odds(odds_american) {
-    let odds = -10000
-    if (odds_american > 0) {
+    let odds
+    if (odds_american >= 100) {
         odds = 100/(odds_american+100)
-    } else if (odds_american < 0) {
+    } else if (odds_american <= -100) {
         odds = (-odds_american)/((-odds_american)+100)
     }
     else {
         odds = "nan"
     }
     return(odds)
+}
+
+export function american_and_wager_to_win(odds_american,wager) {
+    let odds_pct = american_to_pct_odds(odds_american)
+    let win = Math.round(100*(wager / odds_pct))/100
+    return(win)
 }
 
 export function addplus(number) {

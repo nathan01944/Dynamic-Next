@@ -10,6 +10,7 @@ import SubmitBetCard from '../../../../common/BetInterface3x2/SubmitBetCard'
 import MakeOffer from './MakeOffer'
 import TakeOffer from './TakeOffer'
 import Title from './title'
+import AvailableOffers from './AvailableOffers'
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -19,10 +20,9 @@ export default function market() {
       query: { gameID, market, team },
     } = router
 
-  // const { data, error } = useSWR('/api/Odds/marketodds', fetcher)
   const { data, error } = useSWR('/api/Odds/offers', fetcher)
 
-  if (error) return <div>{error.message} fuck </div>
+  if (error) return <div>{error.message} we ran into an error </div>
   if (!data) return <div>Loading...</div>
   
   return (
@@ -70,6 +70,13 @@ export default function market() {
                 />
 
                 <MakeOffer 
+                  gameID = {gameID}
+                  oddsdata = {data.offersdata}
+                  market = {market}
+                  team = {team}
+                />
+
+                <AvailableOffers 
                   gameID = {gameID}
                   oddsdata = {data.offersdata}
                   market = {market}
