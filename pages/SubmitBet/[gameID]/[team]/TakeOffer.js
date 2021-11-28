@@ -1,5 +1,5 @@
-import OfferInput from "./Common/OfferInput";
-import OfferInput3 from "./Common/OfferInput copy 2";
+
+import OfferInput from "./OfferInput";
 
 const TakeOffer = ({ gameID, oddsdata, market, team }) => {
   return (
@@ -22,7 +22,7 @@ const TakeOffer = ({ gameID, oddsdata, market, team }) => {
         <div class="collapse show" id="collapseCardExample">
           <div class="card-body">
             
-            <OfferInput3 />
+            <OfferInput />
 
             {/* <div class="text-gray-800 font-weight-bold pl-3 pb-2">
               Available Offers

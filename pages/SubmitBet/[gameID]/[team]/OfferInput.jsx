@@ -1,8 +1,8 @@
 import { ArrowRight } from 'react-bootstrap-icons';
 import React from 'react';
-import { american_and_wager_to_win, american_to_pct_odds } from '../../../../../common/oddsMath';
+import { american_and_wager_to_win, american_to_pct_odds } from '../../../../common/oddsMath';
 
-class OfferInput2 extends React.Component {
+class OfferInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {wager: '',
@@ -24,19 +24,15 @@ class OfferInput2 extends React.Component {
     this.setState({
       [name]: value
     });
-    
-    // console.log('Changed ' + name + " to " + value)
 
     if (name == "wager") {wager = value}
     if (name == "odds") {odds = value}
     
     if (wager!='' && odds !=''){
       this.setState({
-        win: american_and_wager_to_win(parseFloat(odds), wager)
+        win: american_and_wager_to_win(parseFloat(odds), wager).toFixed(2)
       })
     }
-
-    // console.log("wager " + wager + " odds " + odds + " win " + this.state.win)
   }
 
   handleSubmit(event) {
@@ -79,7 +75,7 @@ class OfferInput2 extends React.Component {
                   <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                   <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                 </svg>
-                <span class="tooltiptext"> Win this amount, and get your wager back</span>
+                <span class="tooltiptext"> Win this amount, including getting your wager back</span>
               </div> 
               {/* <input type="text" name="win" class="form-control form-control-user" value={this.state.win} onChange={this.handleChange} /> */}
               {this.state.win}
@@ -96,4 +92,4 @@ class OfferInput2 extends React.Component {
 }
 
 
-export default OfferInput2
+export default OfferInput

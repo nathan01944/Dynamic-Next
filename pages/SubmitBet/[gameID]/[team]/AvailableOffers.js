@@ -22,8 +22,9 @@ function OfferRow({data,datakeys,i,market}) {
       <td class="p-2"> {data[datakeys[i]]["team"]}</td>
       <td class="p-2"> {addplus(data[datakeys[i]]["odds"])}</td>
       <td class="p-2"> {data[datakeys[i]]["wager"]}</td>
-      <td class="p-2"> {Math.round(100*(american_and_wager_to_win(data[datakeys[i]]["odds"],data[datakeys[i]]["wager"])- data[datakeys[i]]["wager"]))/100}</td>
-      <td class="p-2"> {american_and_wager_to_win(data[datakeys[i]]["odds"],data[datakeys[i]]["wager"])}</td>
+      <td class="p-2"> {(Math.round(100*(american_and_wager_to_win(data[datakeys[i]]["odds"],data[datakeys[i]]["wager"])- data[datakeys[i]]["wager"]))/100).toFixed(2)}</td>
+      <td class="p-2"> {american_and_wager_to_win(data[datakeys[i]]["odds"],data[datakeys[i]]["wager"]).toFixed(2)}</td>
+      <td class="p-2"> <input class="custom-checkbox" type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/> </td>
     </tr>
   )
   else if (market == "spread") return (
@@ -32,8 +33,8 @@ function OfferRow({data,datakeys,i,market}) {
       <td class="p-2"> {addplus(data[datakeys[i]]["line"])} </td>
       <td class="p-2"> {addplus(data[datakeys[i]]["odds"])}</td>
       <td class="p-2"> {data[datakeys[i]]["wager"]}</td>
-      <td class="p-2"> {Math.round(100*(american_and_wager_to_win(data[datakeys[i]]["odds"],data[datakeys[i]]["wager"])- data[datakeys[i]]["wager"]))/100}</td>
-      <td class="p-2"> {american_and_wager_to_win(data[datakeys[i]]["odds"],data[datakeys[i]]["wager"])}</td>
+      <td class="p-2"> {(Math.round(100*(american_and_wager_to_win(data[datakeys[i]]["odds"],data[datakeys[i]]["wager"])- data[datakeys[i]]["wager"]))/100).toFixed(2)}</td>
+      <td class="p-2"> {american_and_wager_to_win(data[datakeys[i]]["odds"],data[datakeys[i]]["wager"]).toFixed(2)}</td>
     </tr>
   )
   else if (market == "total") return (
@@ -41,8 +42,8 @@ function OfferRow({data,datakeys,i,market}) {
       <td class="p-2"> {data[datakeys[i]]["team"] + " " + data[datakeys[i]]["line"]}</td>
       <td class="p-2"> {addplus(data[datakeys[i]]["odds"])}</td>
       <td class="p-2"> {data[datakeys[i]]["wager"]}</td>
-      <td class="p-2"> {Math.round(100*(american_and_wager_to_win(data[datakeys[i]]["odds"],data[datakeys[i]]["wager"])- data[datakeys[i]]["wager"]))/100}</td>
-      <td class="p-2"> {american_and_wager_to_win(data[datakeys[i]]["odds"],data[datakeys[i]]["wager"])}</td>
+      <td class="p-2"> {(Math.round(100*(american_and_wager_to_win(data[datakeys[i]]["odds"],data[datakeys[i]]["wager"])- data[datakeys[i]]["wager"]))/100).toFixed(2)}</td>
+      <td class="p-2"> {american_and_wager_to_win(data[datakeys[i]]["odds"],data[datakeys[i]]["wager"]).toFixed(2)}</td>
   </tr>
   )
   else return (
@@ -53,30 +54,42 @@ function OfferRow({data,datakeys,i,market}) {
 function TableHeader({data,datakeys,i,market}) {
   if (market == "h2h") return (
     <tr>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Team</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Odds</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Your Wager</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Their Wager</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Win</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Team</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Odds</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Your Wager</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Their Wager</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Win</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto pt-2 pb-2">
+        <div class="btn btn-success btn-icon-split pl-1 pr-1">
+          <input type="submit" value="Submit" class="btn btn-success btn-icon-split"/>
+        </div></th>
     </tr>
   )
   else if (market == "spread") return (
     <tr>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Team</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Line</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Odds</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Your Wager</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Their Wager</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Win</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Team</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Line</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Odds</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Your Wager</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Their Wager</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Win</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto pt-2 pb-2">
+        <div class="btn btn-success btn-icon-split pl-1 pr-1">
+          <input type="submit" value="Submit" class="btn btn-success btn-icon-split"/>
+        </div></th>
     </tr>
   )
   else if (market == "total") return (
     <tr>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Over/Under</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Odds</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Your Wager</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Their Wager</th>
-      <th class="font-weight-medium bg-gray-600 text-gray-100 col-xl-auto">Win</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Over/Under</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Odds</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Your Wager</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Their Wager</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Win</th>
+      <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto pt-2 pb-2">
+        <div class="btn btn-success btn-icon-split pl-1 pr-1">
+          <input type="submit" value="Submit" class="btn btn-success btn-icon-split"/>
+        </div></th>
     </tr>
   )
   else return (
