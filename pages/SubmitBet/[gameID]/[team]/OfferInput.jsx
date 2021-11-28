@@ -29,9 +29,11 @@ class OfferInput extends React.Component {
     if (name == "odds") {odds = value}
     
     if (wager!='' && odds !=''){
-      this.setState({
-        win: american_and_wager_to_win(parseFloat(odds), wager).toFixed(2)
-      })
+      if (odds >=100 || odds <=-100) {
+        this.setState({
+          win: american_and_wager_to_win(parseFloat(odds), wager).toFixed(2)
+        })
+      }
     }
   }
 
@@ -78,7 +80,7 @@ class OfferInput extends React.Component {
                 <span class="tooltiptext"> Win this amount, including getting your wager back</span>
               </div> 
               {/* <input type="text" name="win" class="form-control form-control-user" value={this.state.win} onChange={this.handleChange} /> */}
-              {this.state.win}
+              <div class=""> {this.state.win} </div>
             </div>
             
             <div class="col-sm-2 btn btn-success btn-icon-split">

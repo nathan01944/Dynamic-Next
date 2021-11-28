@@ -9,8 +9,7 @@ import Footer from '../../../../common/footer'
 import SubmitBetCard from '../../../../common/BetInterface3x2/SubmitBetCard'
 import MakeOffer from './MakeOffer'
 import TakeOffer from './TakeOffer'
-import Title from './title'
-import AvailableOffers from './AvailableOffers'
+import BidDetails from './BidDetails'
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -59,6 +58,10 @@ export default function market() {
                     team = {team}
                 />
               </div>
+
+              <div class="row pl-2">
+                <BidDetails />
+              </div>
               
               <div class="row">
 
@@ -70,13 +73,6 @@ export default function market() {
                 />
 
                 <MakeOffer 
-                  gameID = {gameID}
-                  oddsdata = {data.offersdata}
-                  market = {market}
-                  team = {team}
-                />
-
-                <AvailableOffers 
                   gameID = {gameID}
                   oddsdata = {data.offersdata}
                   market = {market}

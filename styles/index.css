@@ -9628,7 +9628,8 @@ a.text-info:hover, a.text-info:focus {
 }
 
 .text-warning {
-  color: #f6c23e !important;
+  /* color: #f6c23e !important; */
+  color: #dbaf3d !important;
 }
 
 a.text-warning:hover, a.text-warning:focus {

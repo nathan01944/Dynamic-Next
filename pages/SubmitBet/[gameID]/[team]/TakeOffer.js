@@ -1,5 +1,6 @@
-
+import TakeOfferTable from "./TakeOfferTable";
 import OfferInput from "./OfferInput";
+
 
 const TakeOffer = ({ gameID, oddsdata, market, team }) => {
   return (
@@ -24,16 +25,16 @@ const TakeOffer = ({ gameID, oddsdata, market, team }) => {
             
             <OfferInput />
 
-            {/* <div class="text-gray-800 font-weight-bold pl-3 pb-2">
+            <div class="text-gray-800 font-weight-bold pl-3 pb-2">
               Available Offers
-            </div> */}
+            </div>
 
-            {/* <TakeOfferTable 
+            <TakeOfferTable 
               oddsdata = {oddsdata}
               market = {market}
               team = {team}
               gameID = {gameID}
-            /> */}
+            />
 
           </div>
         </div>
