@@ -1,8 +1,9 @@
 import { ArrowRight } from 'react-bootstrap-icons';
-import React from 'react';
+import React, { useState } from 'react';
 import { american_and_wager_to_win, american_to_pct_odds } from '../../../../common/oddsMath';
 
 class OfferInput extends React.Component {
+// function OfferInput() {
   constructor(props) {
     super(props);
     this.state = {wager: '',
@@ -14,8 +15,9 @@ class OfferInput extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    const target = event.target;
+
+  handleChange() {
+    const target = u.target;
     const value = target.value;
     const name = target.name;
     let wager = this.state.wager

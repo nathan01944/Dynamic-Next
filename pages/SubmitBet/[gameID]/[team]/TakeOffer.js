@@ -1,5 +1,6 @@
 import TakeOfferTable from "./TakeOfferTable";
 import OfferInput from "./OfferInput";
+import TakeOfferTable2 from "./TakeOfferTable2";
 
 
 const TakeOffer = ({ gameID, oddsdata, market, team }) => {
@@ -23,7 +24,14 @@ const TakeOffer = ({ gameID, oddsdata, market, team }) => {
         <div class="collapse show" id="collapseCardExample">
           <div class="card-body">
             
-            <OfferInput />
+            <TakeOfferTable2 
+              oddsdata = {oddsdata}
+              market = {market}
+              team = {team}
+              gameID = {gameID}
+            />
+
+            {/* <OfferInput />
 
             <div class="text-gray-800 font-weight-bold pl-3 pb-2">
               Available Offers
@@ -34,7 +42,7 @@ const TakeOffer = ({ gameID, oddsdata, market, team }) => {
               market = {market}
               team = {team}
               gameID = {gameID}
-            />
+            /> */}
 
           </div>
         </div>
