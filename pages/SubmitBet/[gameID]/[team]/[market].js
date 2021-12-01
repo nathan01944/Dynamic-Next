@@ -50,7 +50,7 @@ export default function market() {
                 />
               </div> */}
 
-              <div class="row container card-body justify-content-center pt-0 pb-2">
+              <div class="row container card-body justify-content-center pt-0 pb-0">
                 <SubmitBetCard  
                     gameID = {gameID}
                     oddsdata={JSON.parse(data.marketodds.raw)}

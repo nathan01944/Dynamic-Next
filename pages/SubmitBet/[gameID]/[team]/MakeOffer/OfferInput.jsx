@@ -1,37 +1,54 @@
 import { ArrowRight, SdCardFill } from 'react-bootstrap-icons';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { american_and_wager_to_win, american_to_pct_odds, addplus} from '../../../../../common/oddsMath';
 
 // class OfferInput extends React.Component {
-function OfferInput(wager,odds,win,handleChange) {
-  // const [wager, setWager] = useState("");
-  // const [odds, setOdds] = useState("");
-  // const [win, setWin] = useState("");
+function OfferInput({parentStateSetter}) {
+  const childRef = useRef();
+  const [childState, setChildState] = useState(0);
+
+  const [wager, setWager] = useState("");
+  const [odds, setOdds] = useState("");
+  const [win, setWin] = useState("");
   
-  // const handleChange = (event) => {
-  //   // setState(event.target.value)
-  //   const value = event.target.value
-  //   const name = event.target.name
-  //   setWin("")
-  //   let tmpodds
-  //   let tmpwager
+  const handleChange = (event) => {
+    const value = event.target.value
+    const name = event.target.name
+    setWin("")
+    let tmpodds
+    let tmpwager
 
-  //   if (name == "wager") {setWager(value)}
-  //   if (name == "odds") {setOdds(value)}
-  //   if (name == "wager") {tmpwager = value} else (tmpwager = wager)
-  //   if (name == "odds") {tmpodds = value} else (tmpodds = odds)
+    if (name == "wager") {setWager(value)}
+    if (name == "odds") {setOdds(value)}
+    if (name == "wager") {tmpwager = value} else (tmpwager = wager)
+    if (name == "odds") {tmpodds = value} else (tmpodds = odds)
     
-  //   if (tmpwager!='' && tmpodds !=''){
-  //     if (tmpodds >=100 || tmpodds <=-100) {
-  //       setWin(american_and_wager_to_win(parseFloat(tmpodds), tmpwager).toFixed(2))
-  //       console.log("pls")
-  //     }
-  //   }
+    if (tmpwager!='' && tmpodds !=''){
+      if (tmpodds >=100 || tmpodds <=-100) {
+        setWin(american_and_wager_to_win(parseFloat(tmpodds), tmpwager).toFixed(2))
+        console.log("pls")
+      }
+    }
+  }
+
+  // useEffect(() => {
+  //   parentStateSetter(childState);
+  // }, [parentStateSetter, childState]);
+
+  // const handleChange = e => {
+  // //pass slider's event value to child's state
+  //   setChildState(e.target.value);
   // }
 
-  // const handleChange = (event) => {
-  //   setWager(event.target.value)
-  // }
+  // const handleChange = e => {
+  //   //pass slider's event value to child's state
+  //     setWager(e.target.value);
+  //   };
+
+  // useEffect(() => {
+  //     parentWagerSetter(wager);
+  //   }, [parentWagerSetter, wager]);
+
 
   const handleSubmit = (event) => {
     alert("wager " + wager + " odds " + odds + " win " + win);
@@ -50,7 +67,7 @@ function OfferInput(wager,odds,win,handleChange) {
               </svg>
               <span class="tooltiptext">Lose this amount</span>
             </div> 
-            <input type="text" name="wager" class="form-control form-control-user" value={wager}  onChange={handleChange}/> 
+            <input type="text" name="wager" class="form-control form-control-user" value={wager} onChange={handleChange} ref={childRef}/> 
             {/* onChange={e => setWager(e.target.value)} */}
           </div>
 

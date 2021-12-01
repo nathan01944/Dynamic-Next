@@ -6,10 +6,7 @@ function TableHeader({data,datakeys,i,market}) {
         <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Your Wager</th>
         <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Their Wager</th>
         <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Win</th>
-        <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto pt-2 pb-2">
-          <div class="btn btn-success btn-icon-split pl-1 pr-1">
-            <input type="submit" value="Submit" class="btn btn-success btn-icon-split"/>
-          </div></th>
+        <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Take Offer</th>
       </tr>
     )
     else if (market == "spread") return (
@@ -20,10 +17,7 @@ function TableHeader({data,datakeys,i,market}) {
         <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Your Wager</th>
         <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Their Wager</th>
         <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Win</th>
-        <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto pt-2 pb-2">
-          <div class="btn btn-success btn-icon-split pl-1 pr-1">
-            <input type="submit" value="Submit" class="btn btn-success btn-icon-split"/>
-          </div></th>
+        <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Take Offer</th>
       </tr>
     )
     else if (market == "total") return (
@@ -33,10 +27,7 @@ function TableHeader({data,datakeys,i,market}) {
         <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Your Wager</th>
         <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Their Wager</th>
         <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Win</th>
-        <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto pt-2 pb-2">
-          <div class="btn btn-success btn-icon-split pl-1 pr-1">
-            <input type="submit" value="Submit" class="btn btn-success btn-icon-split"/>
-          </div></th>
+        <th class="font-weight-medium bg-gray-600 text-gray-100 col-auto">Take Offer</th>
       </tr>
     )
     else return (
