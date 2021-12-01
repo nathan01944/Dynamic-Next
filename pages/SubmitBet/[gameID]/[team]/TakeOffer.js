@@ -1,5 +1,5 @@
 import TakeOfferTable from "./TakeOfferTable";
-import OfferInput from "./OfferInput";
+import OfferInput from "./TakeOfferTable2/OfferInput";
 import TakeOfferTable2 from "./TakeOfferTable2";
 
 

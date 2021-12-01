@@ -1,5 +1,5 @@
 import { addplus, american_and_wager_to_win } from "../../../../common/oddsMath";
-import OfferInput from "./OfferInput";
+import OfferInput from "./TakeOfferTable2/OfferInput";
 
 function findGameByID(data, gameID,home,market) {
   //to add sort

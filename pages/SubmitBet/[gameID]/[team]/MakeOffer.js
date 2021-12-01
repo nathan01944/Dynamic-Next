@@ -1,4 +1,4 @@
-import OfferInput from "./OfferInput";
+import OfferInput from "./TakeOfferTable2/OfferInput";
 
 const MakeOffer = ({ gameID, oddsdata, market, team }) => {
   return (
