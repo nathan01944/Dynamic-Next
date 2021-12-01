@@ -59,7 +59,7 @@ export default function market() {
                 />
               </div>
 
-              <div class="row pl-2">
+              <div class="row p-1 py-0">
                 <BidDetails />
               </div>
               

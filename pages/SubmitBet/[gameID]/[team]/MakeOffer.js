@@ -2,7 +2,7 @@ import OfferInput from "./MakeOffer/OfferInput";
 
 const MakeOffer = ({ gameID, oddsdata, market, team }) => {
   return (
-    <div class="container-fluid col-lg-6 pl-2"> 
+    <div class="container-fluid col-lg-6 px-1"> 
 
       <div class="card shadow mb-6">
 

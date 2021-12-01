@@ -24,9 +24,17 @@ function findGameByID(data, gameID,home,market) {
 }
 
 const TakeOfferTable = ({ gameID, oddsdata, market, team }) => {
+  let home = (team == 0) ? "home" : "away"
+  let filteredoffers = findGameByID(oddsdata,gameID,home,market)
+  const datakeys = Object.keys(filteredoffers);
+  const numBets = datakeys.length
+
   const [wager, setWager] = useState("");
   const [odds, setOdds] = useState("");
   const [win, setWin] = useState("");
+//   const [checked, setChecked] = useState(
+//     new Array(numBets).fill(false)
+// );
 
   const handleChange = (event) => {
     const value = event.target.value
@@ -45,16 +53,22 @@ const TakeOfferTable = ({ gameID, oddsdata, market, team }) => {
         setWin(american_and_wager_to_win(parseFloat(tmpodds), tmpwager).toFixed(2))
       }
     }
+
+    setCheckedState(Array(numBets).fill(false))
   }
 
-  const handleChange2 = (event) => {
-    console.log(event)
-  }
+  const [checkedState, setCheckedState] = useState(
+    new Array(numBets).fill(false)
+  );
 
-  let home = (team == 0) ? "home" : "away"
-  let filteredoffers = findGameByID(oddsdata,gameID,home,market)
-  const datakeys = Object.keys(filteredoffers);
-  const numBets = datakeys.length
+  const handleOnChange = (position) => {
+    console.log(checkedState, position)
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setCheckedState(updatedCheckedState);
+  };
 
   return (
     <div class="">
@@ -91,7 +105,8 @@ const TakeOfferTable = ({ gameID, oddsdata, market, team }) => {
                     datakeys = {datakeys}
                     i = {i}
                     market = {market}
-                    onChange={handleChange2}
+                    checked = {checkedState[i]}
+                    onChange={handleOnChange}
                   />
               )}
             </tbody>

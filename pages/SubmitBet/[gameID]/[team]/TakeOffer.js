@@ -2,7 +2,7 @@ import TakeOfferTable from "./TakeOfferTable";
 
 const TakeOffer = ({ gameID, oddsdata, market, team }) => {
   return (
-    <div class="container-fluid col-lg-6 pr-2"> 
+    <div class="container-fluid col-lg-6 px-1"> 
 
       <div class="card shadow mb-6">
 
