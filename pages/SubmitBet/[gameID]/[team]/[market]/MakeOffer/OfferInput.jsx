@@ -1,6 +1,6 @@
 import { ArrowRight, SdCardFill } from 'react-bootstrap-icons';
 import React, { useState, useEffect, useRef } from 'react';
-import { american_and_wager_to_win, american_to_pct_odds, addplus} from '../../../../../common/oddsMath';
+import { american_and_wager_to_win, american_to_pct_odds, addplus} from '../../../../../../common/oddsMath';
 
 // class OfferInput extends React.Component {
 function OfferInput({parentStateSetter}) {

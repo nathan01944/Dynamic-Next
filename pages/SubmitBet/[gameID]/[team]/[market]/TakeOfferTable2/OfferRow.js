@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { addplus, american_and_wager_to_win } from "../../../../../common/oddsMath"
+import { addplus, american_and_wager_to_win } from "../../../../../../common/oddsMath"
 
 // function OfferRow({props.data,props.datakeys,i,props.market}) {
 const OfferRow = props => {
@@ -16,7 +16,6 @@ const OfferRow = props => {
       <td class="p-2"> {wager}</td>
       <td class="p-2"> {theirwager.toFixed(2)}</td>
       <td class="p-2"> {win}</td>
-      {/* <td class="p-2"> <input class="custom-checkbox" type="checkbox" name="checkbox" onChange={event => {props.onChange(event), setChecked(checked*(-1)+1)} } wager={checked*wager} win={checked*win} checked={checked}/> </td> */}
       <td class="p-2"> <input class="custom-checkbox" type="checkbox" index={props.i} name="checkbox" onChange={event => {props.onChange(props.i)} } checked={props.checked}/> </td>
     </tr>
   )
@@ -25,19 +24,24 @@ const OfferRow = props => {
       <td class="p-2"> {props.data[props.datakeys[props.i]]["team"]}</td>
       <td class="p-2"> {addplus(props.data[props.datakeys[props.i]]["line"])} </td>
       <td class="p-2"> {addplus(props.data[props.datakeys[props.i]]["odds"])}</td>
-      <td class="p-2"> {props.data[props.datakeys[props.i]]["wager"]}</td>
-      <td class="p-2"> {(Math.round(100*(american_and_wager_to_win(props.data[props.datakeys[props.i]]["odds"],props.data[props.datakeys[props.i]]["wager"])- props.data[props.datakeys[props.i]]["wager"]))/100).toFixed(2)}</td>
-      <td class="p-2"> {american_and_wager_to_win(props.data[props.datakeys[props.i]]["odds"],props.data[props.datakeys[props.i]]["wager"]).toFixed(2)}</td>
+      <td class="p-2"> {wager}</td>
+      <td class="p-2"> {theirwager.toFixed(2)}</td>
+      <td class="p-2"> {win}</td>
+      <td class="p-2"> <input class="custom-checkbox" type="checkbox" index={props.i} name="checkbox" onChange={event => {props.onChange(props.i)} } checked={props.checked}/> </td>
     </tr>
   )
   else if (props.market == "total") return (
     <tr>
       <td class="p-2"> {props.data[props.datakeys[props.i]]["team"] + " " + props.data[props.datakeys[props.i]]["line"]}</td>
       <td class="p-2"> {addplus(props.data[props.datakeys[props.i]]["odds"])}</td>
-      <td class="p-2"> {props.data[props.datakeys[props.i]]["wager"]}</td>
-      <td class="p-2"> {(Math.round(100*(american_and_wager_to_win(props.data[props.datakeys[props.i]]["odds"],props.data[props.datakeys[props.i]]["wager"])- props.data[props.datakeys[props.i]]["wager"]))/100).toFixed(2)}</td>
-      <td class="p-2"> {american_and_wager_to_win(props.data[props.datakeys[props.i]]["odds"],props.data[props.datakeys[props.i]]["wager"]).toFixed(2)}</td>
-  </tr>
+      <td class="p-2"> {wager}</td>
+      <td class="p-2"> {theirwager.toFixed(2)}</td>
+      <td class="p-2"> {win}</td>
+      <td class="p-2"> sdf </td>
+      <td class="p-2">  
+        <input class="custom-checkbox" type="checkbox" index={props.i} name="checkbox" onChange={event => {props.onChange(props.i)} } checked={props.checked}/> 
+      </td>
+    </tr>
   )
   else return (
     <tr></tr>

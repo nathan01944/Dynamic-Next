@@ -1,4 +1,4 @@
-import { addplus, american_and_wager_to_win, wager_and_win_to_odds_american } from "../../../../common/oddsMath";
+import { addplus, american_and_wager_to_win, wager_and_win_to_odds_american } from "../../../../../common/oddsMath";
 // import OfferInput from "./TakeOfferTable2/OfferInput";
 import OfferRow from "./TakeOfferTable2/OfferRow";
 import TableHeader from "./TakeOfferTable2/TableHeader";
