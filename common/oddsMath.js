@@ -32,6 +32,12 @@ export function american_and_wager_to_win(odds_american,wager) {
     return(win)
 }
 
+export function wager_and_win_to_odds_american(wager,win) {
+    let odds_pct = wager / win
+    let odds_american = pct_to_american_odds(odds_pct)
+    return(odds_american)
+}
+
 export function addplus(number) {
     if (number < 0) {
       var oddsstring = number.toString()
