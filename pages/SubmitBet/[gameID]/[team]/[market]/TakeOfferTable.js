@@ -110,6 +110,8 @@ const TakeOfferTable = ({ gameID, oddsdata, market, team }) => {
         gameID = {gameID}
         team = {team}
         market = {market}
+        win = {win}
+        wager = {wager}
       />
     </form>
         

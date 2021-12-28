@@ -37,7 +37,6 @@ const OfferRow = props => {
       <td class="p-2"> {wager}</td>
       <td class="p-2"> {theirwager.toFixed(2)}</td>
       <td class="p-2"> {win}</td>
-      <td class="p-2"> sdf </td>
       <td class="p-2">  
         <input class="custom-checkbox" type="checkbox" index={props.i} name="checkbox" onChange={event => {props.onChange(props.i)} } checked={props.checked}/> 
       </td>
