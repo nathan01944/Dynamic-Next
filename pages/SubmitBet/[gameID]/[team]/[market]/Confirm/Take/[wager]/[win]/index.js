@@ -21,6 +21,27 @@ export default function market() {
 
   if (error) return <div>{error.message} we ran into an error </div>
   if (!data) return <div>Loading...</div>
+
+  const handleSubmission = async () => {
+    const info = {
+      gameID: gameID,
+      team: team,
+      market: market,
+      win: win,
+      wager: wager
+    }
+
+    const res2 = await fetch("/api/SubmitBet", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(info)
+    });
+
+    const result = await res2.json();
+    console.log(result) // { message: "success" }
+  }
   
   return (
     <div class="p-0">
@@ -45,7 +66,7 @@ export default function market() {
                     <h1 class="h1 p-4 text-gray-800 justify-content-center">Execute Bet </h1>
                   
                   <div class="col-lg-2 btn btn-success btn-icon-split">
-                    <input type="submit" value="Confirm" class="btn btn-success btn-icon-split" />
+                    <input onClick={handleSubmission} type="submit" value="Confirm" class="btn btn-success btn-icon-split" />
                   </div>
 
                 </div>
