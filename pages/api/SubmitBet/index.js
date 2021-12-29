@@ -25,7 +25,7 @@ export default async function user(req, res) {
     offer.home = req.body.team==0 ? "home" : "away"
     //offer.team = (market=="total") ? "Over" : game.home_team
     offer.odds = wager_and_win_to_odds_american(req.body.wager,req.body.win)
-    //offer.line = line_home (IMPORTANT)
+    offer.line = req.body.line
     offer.wager = req.body.wager
     offer.win = req.body.win
 

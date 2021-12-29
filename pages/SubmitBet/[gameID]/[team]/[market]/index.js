@@ -21,7 +21,7 @@ export default function market() {
 
   const { data, error } = useSWR('/api/Odds/offers', fetcher)
 
-  if (error) return <div>{error.message} we ran into an error </div>
+  if (error) return <div>we ran into an error: {error.message} </div>
   if (!data) return <div>Loading...</div>
   
   return (
@@ -40,15 +40,6 @@ export default function market() {
               <div id="content-wrapper" class="d-flex flex-column">
                 <Topbar />
               </div>
-              
-              {/* <div class="row container card-body justify-content-center pt-0">
-                <Title 
-                  gameID = {gameID}
-                  oddsdata={JSON.parse(data.marketodds.raw)}
-                  market = {market}
-                  team = {team}
-                />
-              </div> */}
 
               <div class="row container card-body justify-content-center pt-0 pb-0">
                 <SubmitBetCard  

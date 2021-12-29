@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 //components
-import Sidebar from '../../../../../../../../../common/sidebar'
-import Topbar from '../../../../../../../../../common/Topbar'
-import Footer from '../../../../../../../../../common/footer'
-import SubmitBetCard from '../../../../../../../../../common/BetInterface3x2/SubmitBetCard'
+import Sidebar from '../../../../../../../../../../common/sidebar'
+import Topbar from '../../../../../../../../../../common/Topbar'
+import Footer from '../../../../../../../../../../common/footer'
+import SubmitBetCard from '../../../../../../../../../../common/BetInterface3x2/SubmitBetCard'
 import BetStats from './stats'
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -14,7 +14,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json());
 export default function market() {
   const router = useRouter()
   const {
-      query: { gameID, market, team, wager, win },
+      query: { gameID, market, team, wager, win, line },
     } = router
 
   const { data, error } = useSWR('/api/Odds/offers', fetcher)
@@ -25,10 +25,12 @@ export default function market() {
   if (!data) return <div>Loading...</div>
 
   const handleSubmission = async () => {
+    console.log("hit submit")
     const info = {
       gameID: gameID,
       team: team,
       market: market,
+      line: line,
       win: win,
       wager: wager
     }
@@ -43,12 +45,12 @@ export default function market() {
 
     const Feedback = await res2.json();
     if (Feedback.message == "success") {
-      setConfirmed(1)
+      //setConfirmed(1)
     }
-    //console.log(Feedback.message) // { message: "success" }
+    console.log(Feedback.message) // { message: "success" }
   }
   
-  if (confirmed = 0) {
+  if (confirmed == 0) {
     return (
       <div class="p-0">
         <Head>
@@ -99,7 +101,7 @@ export default function market() {
       </div>
     )
   }
-  else if (confirmed = 1) {
+  else if (confirmed == 1) {
     return (
       <div class="p-0">
         <Head>

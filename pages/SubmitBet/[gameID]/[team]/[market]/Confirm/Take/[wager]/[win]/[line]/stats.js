@@ -1,4 +1,4 @@
-import { addplus, wager_and_win_to_odds_american } from "../../../../../../../../../common/oddsMath";
+import { addplus, wager_and_win_to_odds_american } from "../../../../../../../../../../common/oddsMath";
 
 function findGameByID(data, gameID,home,market) {
     //to add sort
