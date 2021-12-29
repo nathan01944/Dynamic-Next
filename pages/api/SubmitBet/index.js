@@ -1,4 +1,5 @@
 import Redis from 'ioredis'
+import { addplus, wager_and_win_to_odds_american } from '../../../common/oddsMath';
 
 let redis = new Redis("rediss://:1ab8f665ce744567ba3c4ee12ed4c869@us1-upward-lioness-34844.upstash.io:34844");
 
@@ -17,7 +18,18 @@ export default async function user(req, res) {
     let userID = "000001"
     let offerID = userID + "-" + Date.now().toString() + "-" + Math.random().toString(10).substr(2)
 
-    const body = JSON.stringify(req.body)
+    let offer = {}
+    offer.gameID = req.body.game_id
+    offer.market = req.body.market
+    offer.offerID = offerID
+    offer.home = req.body.team==0 ? "home" : "away"
+    //offer.team = (market=="total") ? "Over" : game.home_team
+    offer.odds = wager_and_win_to_odds_american(req.body.wager,req.body.win)
+    //offer.line = line_home (IMPORTANT)
+    offer.wager = req.body.wager
+    offer.win = req.body.win
+
+    const body = JSON.stringify(offer)
     //console.log(body) // {"name":"Kieran","age":26}
     //console.log(typeof(body))
     // console.log(req.query) // {} in our example

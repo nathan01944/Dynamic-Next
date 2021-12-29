@@ -17,19 +17,20 @@ function findGameByID(data, gameID,home,market) {
   }
 
 const BetStats = props => {
-    console.log(props)
     let home = (props.team == 0) ? "home" : "away"
     let filteredoffers = findGameByID(props.oddsdata,props.gameID,home,props.market)
     let datakeys = Object.keys(filteredoffers);
     let betteam = filteredoffers[datakeys[0]]["team"]
     let betline = filteredoffers[datakeys[0]]["line"]
+    let fewerVsAtLeast = (props.team == 0) ? "at least" : "fewer than"
+    let winningVsLosing = (betline <= 0) ? "win by at least" : "win or if they lose by fewer than"
     let theirwager = props.win - props.wager
 
     if (props.market == "h2h") {
         return (
             <div class = "row p-4 ">
                 <div class="row col-12 py-2">
-                    Pay ${props.wager} now. If {betteam} wins you win ${props.win}.
+                    Pay ${props.wager} now. Win ${props.win} if {betteam} wins.
                 </div>
             </div>
         )
@@ -37,26 +38,9 @@ const BetStats = props => {
     else if (props.market == "spread") {
            return (
             <div class = "row p-4 ">
-                <table>
-                    <tbody>
-                        <tr> 
-                            <td> Your Wager: </td>
-                            <td> ${props.wager} </td>
-                        </tr>
-                        <tr> 
-                            <td> Their Wager: </td>
-                            <td> ${theirwager.toFixed(2)} </td>
-                        </tr>
-                        <tr> 
-                            <td> Win: </td>
-                            <td> ${props.win} </td>
-                        </tr>
-                        <tr> 
-                            <td> Odds: </td>
-                            <td> {addplus(wager_and_win_to_odds_american(props.wager,props.win).toFixed(0))} </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="row col-12 py-2">
+                    Pay ${props.wager} now. Win ${props.win} if the {betteam} {winningVsLosing} {Math.abs(betline)} points.
+                </div>
             </div>
         )
     } 
@@ -64,7 +48,7 @@ const BetStats = props => {
         return (
             <div class = "row p-4 ">
                 <div class="row col-12 py-2">
-                    Pay ${props.wager} now. If both teams score at least {betline} points win ${props.win}.
+                    Pay ${props.wager} now. Win ${props.win} if both teams score {fewerVsAtLeast} {betline} points.
                 </div>
             </div>
         )

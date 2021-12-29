@@ -19,3 +19,5 @@ export default async (req, res) => {
      res.status(404).json({ message: `Data not found.` })
    }
  }
+
+ //redis.flushall()
