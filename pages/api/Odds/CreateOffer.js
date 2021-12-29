@@ -1,3 +1,4 @@
+import { american_and_wager_to_win } from '../../../common/oddsMath'
 import {pct_to_american_odds, american_to_pct_odds} from '/common/oddsMath.js'
 
 export default function CreateOffer(game,vig,wager,market) {
@@ -30,6 +31,7 @@ export default function CreateOffer(game,vig,wager,market) {
     offerhome.odds = Math.round(pct_to_american_odds(american_to_pct_odds(mktodds) + vig))
     offerhome.line = line_home
     offerhome.wager = wager
+    offerhome.win = american_and_wager_to_win(offerhome.odds,wager)
 
     let offeraway = {}
     offeraway.gameID = game.game_id
@@ -40,6 +42,7 @@ export default function CreateOffer(game,vig,wager,market) {
     offeraway.odds = Math.round(pct_to_american_odds(1-american_to_pct_odds(mktodds) + vig))
     offeraway.line = line_away
     offeraway.wager = wager
+    offeraway.win = american_and_wager_to_win(offeraway.odds,wager)
 
     return[offerhome,offeraway]
 }
