@@ -8,14 +8,14 @@ const SubmitButton = props => {
         // </button>
         <Link
             href={{
-                pathname: "/SubmitBet/[gameID]/[team]/[market]/Confirm/Take/[wager]/[win]",
+                pathname: "/SubmitBet/[gameID]/[team]/[market]/Confirm/Take/[wager]/[win]/[line]",
                 query: {
                     // gameID: {props.gameID},
                     // team: {props.team},
                     // market: {props.market}
                 }
             }}
-            as={`/SubmitBet/${props.gameID}/${props.team}/${props.market}/Confirm/Take/${props.wager}/${props.win}`}
+            as={`/SubmitBet/${props.gameID}/${props.team}/${props.market}/Confirm/Take/${props.wager}/${props.win}/${props.line}`}
             // as={`/SubmitBet/8e9ae629b30fdb1fe9430477f906eafd/${props.gameID}/h2h`}
         passHref>
             <div class="col-sm-2 btn btn-success btn-icon-split">

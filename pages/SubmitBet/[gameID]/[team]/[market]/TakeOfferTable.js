@@ -1,12 +1,13 @@
 import { addplus, american_and_wager_to_win, wager_and_win_to_odds_american } from "../../../../../common/oddsMath";
 // import OfferInput from "./TakeOfferTable2/OfferInput";
-import OfferRow from "./TakeOfferTable2/OfferRow";
-import TableHeader from "./TakeOfferTable2/TableHeader";
+import OfferRow from "./TakeOfferTable/OfferRow";
+import TableHeader from "./TakeOfferTable/TableHeader";
 import React, { useState, useCallback } from 'react';
-import InputWager from "./TakeOfferTable2/InputWager";
-import InputOdds from "./TakeOfferTable2/InputOdds";
-import InputWin from "./TakeOfferTable2/InputWin";
-import SubmitButton from "./TakeOfferTable2/SubmitButton";
+import InputWager from "./TakeOfferTable/InputWager";
+import InputOdds from "./TakeOfferTable/InputOdds";
+import InputWin from "./TakeOfferTable/InputWin";
+import SubmitButton from "./TakeOfferTable/SubmitButton";
+import InputLine from "./TakeOfferTable/InputLine";
 
 function findGameByID(data, gameID,home,market) {
   //to add sort
@@ -30,6 +31,7 @@ const TakeOfferTable = ({ gameID, oddsdata, market, team }) => {
   const datakeys = Object.keys(filteredoffers);
   const numBets = datakeys.length
 
+  const [line,setLine] = useState("")
   const [wager, setWager] = useState("");
   const [odds, setOdds] = useState("");
   const [win, setWin] = useState("");
@@ -66,20 +68,25 @@ const TakeOfferTable = ({ gameID, oddsdata, market, team }) => {
     let updatedWager = 0
     let updatedWin = 0
     let updatedOdds = 0
+    let updatedLine = 0
 
     for (var i = 0; i < numBets; i++) {
       if (updatedCheckedState[i]) {
         let thiswager = parseFloat(filteredoffers[datakeys[i]].wager)
         let thiswin = parseFloat(american_and_wager_to_win(filteredoffers[datakeys[i]].odds,filteredoffers[datakeys[0]].wager))
+        let thisline = filteredoffers[datakeys[i]].line
+
         updatedWager = updatedWager + thiswager
         updatedWin = updatedWin + thiswin
         updatedOdds = wager_and_win_to_odds_american(updatedWager,updatedWin)
+        updatedLine = thisline //ToDo: add logic to prevent adding bets with different lines
       }
     }
 
     setWager(updatedWager.toFixed(2))
     setWin(updatedWin.toFixed(2))
     setOdds(updatedOdds.toFixed(0))
+    setLine(updatedLine)
     setCheckedState(updatedCheckedState);
   };
 
@@ -92,9 +99,15 @@ const TakeOfferTable = ({ gameID, oddsdata, market, team }) => {
     <div class="">
 
     <form class="p-0 form-group row col-12" onSubmit={handleSubmit}>  
+     <InputLine
+        line = {line}
+        onChange={handleChange} 
+        market = {market}
+      />
       <InputOdds 
         odds = {odds}
         onChange={handleChange} 
+        market = {market}
       />
       <InputWager 
         wager = {wager}
@@ -102,6 +115,7 @@ const TakeOfferTable = ({ gameID, oddsdata, market, team }) => {
       />
       <InputWin 
         win = {win}
+        market = {market}
       />
       {/* <div class="col-sm-2 btn btn-success btn-icon-split">
         <input type="submit" value="Submit" class="btn btn-success btn-icon-split" />
@@ -110,6 +124,7 @@ const TakeOfferTable = ({ gameID, oddsdata, market, team }) => {
         gameID = {gameID}
         team = {team}
         market = {market}
+        line = {line}
         win = {win}
         wager = {wager}
       />

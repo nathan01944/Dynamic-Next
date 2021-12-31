@@ -4,7 +4,7 @@ import Footer from '../../common/footer';
 import Sidebar from '../../common/sidebar';
 import Topbar from '../../common/Topbar';
 
-function NFL() {
+function NBA() {
   return (
     <div class="p-0">
       <Head>
@@ -35,4 +35,4 @@ function NFL() {
   );
 }
 
-export default NFL;
+export default NBA;

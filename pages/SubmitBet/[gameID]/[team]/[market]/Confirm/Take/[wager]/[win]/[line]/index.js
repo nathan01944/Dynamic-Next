@@ -8,6 +8,7 @@ import Topbar from '../../../../../../../../../../common/Topbar'
 import Footer from '../../../../../../../../../../common/footer'
 import SubmitBetCard from '../../../../../../../../../../common/BetInterface3x2/SubmitBetCard'
 import BetStats from './stats'
+import Link from 'next/link'
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -45,7 +46,7 @@ export default function market() {
 
     const Feedback = await res2.json();
     if (Feedback.message == "success") {
-      //setConfirmed(1)
+      setConfirmed(1)
     }
     console.log(Feedback.message) // { message: "success" }
   }
@@ -122,13 +123,15 @@ export default function market() {
                     <div class="row mb-4 text-center justify-content-center">
                       <h1 class="h1 p-4 text-gray-800 justify-content-center">See My Bets: </h1>
                       <div class="col-lg-2 btn btn-success btn-icon-split">
-                        <input onClick={handleSubmission} type="submit" value="My Account" class="btn btn-success btn-icon-split" />
+                        <Link href="/MyAccount" passHref>
+                          <input type="submit" value="My Account" class="btn btn-success btn-icon-split" />
+                        </Link>
                       </div>
                     </div>
                   
                     <div class = "row p-4 ">
                       <div class="row col-12 py-2">
-                        You have successfully placed your bet.
+                        You have successfully placed your offer. Please allow up to one minute for the market matching process to match your bet with others.
                       </div>
                     </div>
               </div>
