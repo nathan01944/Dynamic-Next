@@ -14,3 +14,24 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.customtooltip:hover .tooltiptext {
+  /* NEW */
+  display: block;
+}
+
+.tooltiptext {
+  display: none;
+  /* NEW */
+  background: #C8C8C8;
+  /* margin-left: 28px;
+  padding: 10px; */
+  position: absolute;
+  /* z-index: 1000;
+  width: 200px;
+  height: 100px; */
+}
+
+.customtooltip {
+  /* margin: 100px; */
+}

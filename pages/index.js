@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 //components
 import FeaturedBets from './FeaturedBets'
 import Sidebar from '../common/sidebar'
@@ -27,6 +26,7 @@ export default function Home() {
               </div>
               <Description />
               <FeaturedBets />
+              
             </div>
           </div>
         </div>

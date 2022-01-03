@@ -1,74 +1,68 @@
 import React, { Component } from 'react';
 import Link from 'next/dist/client/link';
-//import oddsdata from '../../data/formatted.json'
 
-const BetInterface3x2 = ({oddsdata, num}) => {
+const BetInterface3x2 = ({oddsdata, gameID, market, team}) => {
+  // const gamedata = JSON.parse(oddsdata.data.raw)
+  // const game = gamedata[gameID]
+
+  //const gamedata = JSON.parse(oddsdata.data.raw)
+  const game = oddsdata[gameID]
+
   const game1 = [
     {
-      team: oddsdata.home_team[num],
-      h2h: addplus(oddsdata.odds[num].h2h_home),
-      spread: addplus(oddsdata.odds[num].spread_home_line) + ": " + addplus(oddsdata.odds[num].spread_home),
-      overunder: oddsdata.odds[num].totals_line + ": " + addplus(oddsdata.odds[num].totals_over) + "o",
+      team: game.home_team,
+      h2h: addplus(game.odds.h2h_home),
+      spread: addplus(game.odds.spread_home_line) + ": " + addplus(game.odds.spread_home),
+      total: game.odds.totals_line + "o" + ": " + addplus(game.odds.totals_over),
     },
     {
-      team: oddsdata.away_team[num],
-      h2h: addplus(oddsdata.odds[num].h2h_away),
-      spread: addplus(oddsdata.odds[num].spread_away_line) + ": " + addplus(oddsdata.odds[num].spread_away),
-      overunder: oddsdata.odds[num].totals_line + ": " + addplus(oddsdata.odds[num].totals_under) + "u",
+      team: game.away_team,
+      h2h: addplus(-game.odds.h2h_home),
+      spread: addplus(-game.odds.spread_home_line) + ": " + addplus(-game.odds.spread_home),
+      total: game.odds.totals_line + "u" + ": " + addplus(-game.odds.totals_over),
     }
   ]
 
-  const tmp = 1
 
   return (
     <div>
       <Description 
         home_team = {game1[0].team}
         away_team= {game1[1].team}
-        date={oddsdata.commence_time[num]}
+        date={game.commence_time}
       />
 
-      <Link
-          href={{
-              pathname: "/SubmitBet/[gameID]/[bettype]",
-              query: {
-                  gameID: {num},
-                  bettype: 1
-              }
-          }}
-          as={`/SubmitBet/${num}/1`}
-      passHref>
-          here
-      </Link>
-
       <div class="mb-0 text-s text-gray-800">
-        <table class="table-bordered" id="dataTable" width="100%" cellSpacing="10">
+        <table class="table-bordered th col-md-12" id="dataTable" width="100%" cellSpacing="10">
             <thead>
                 <tr>
-                    <th>Team</th>
-                    <th>Spread</th>
-                    <th>Moneyline</th>
-                    <th>Over/Under</th>
+                    <th class="font-weight-medium bg-gray-600 text-gray-100 col-md-3">Team</th>
+                    <th class="font-weight-medium bg-gray-600 text-gray-100 col-md-2">Moneyline</th>
+                    <th class="font-weight-medium bg-gray-600 text-gray-100 col-md-2">Spread</th>
+                    <th class="font-weight-medium bg-gray-600 text-gray-100 col-md-2">Over/Under</th>
                 </tr>
             </thead>
             <tbody>
-              {game1.map((data, key) => {
-                return (
-                  <Line
-                    team={data.team}
-                    h2h={data.h2h}
-                    spread= {data.spread}
-                    overunder={data.overunder}
-                    num = {num}
-                  />
-                );
-              })}
+              <Line
+                away = {0}
+                gameID = {gameID}
+                game = {game1}
+                lineHighlight = {team == 0 ? market : ""}
+              />
+              <Line
+                away = {1}
+                gameID = {gameID}
+                game = {game1}
+                lineHighlight = {""}
+                lineHighlight = {team == 1 ? market : ""}
+              />
             </tbody>
         </table>
       </div>
     </div>
   );
 };
+
 
 const Description = ({ away_team, home_team, date }) => {
   const day = new Date(date).getDate()
@@ -83,33 +77,74 @@ const Description = ({ away_team, home_team, date }) => {
 
   return (
     <div>
-      <div class="text-s font-weight-bold text-primary mb-1">
-        {home_team} vs {away_team}
+      <div class="text-s font-weight-bold text-gray-800 mb-1">
+        {away_team} @ {home_team}
       </div>
-      <div class="text-s font-weight-bold text-primary mb-1">
-        {month}/{day} @ {hour}:{mins}
+      <div class="text-s font-weight-bold text-gray-800 mb-1">
+        {month}/{day} @ {hour}:{mins} EST
       </div>
     </div>
   );
 };
 
-const Line = ({ h2h, team, spread, overunder,num }) => {
-  if (!h2h) return <div />;
+const Line = ({ away , gameID, game, lineHighlight }) => {
+  if (!game) return <tr />;
   return (
     <tr>
-      <td>{team}</td>
-      <td>{spread}</td>
-      <td>{h2h}</td>
-      <td>{overunder}</td>
+      <td>{game[away]["team"]}</td>
+      <CellButton 
+        away={away}
+        market={"h2h"}
+        gameID={gameID}
+        game={game}
+        cellhighlight = {lineHighlight == "h2h" ? 1 : 0}
+      />
+      <CellButton 
+        away={away}
+        market={"spread"}
+        gameID={gameID}
+        game={game}
+        cellhighlight = {lineHighlight == "spread" ? 1 : 0}
+      />
+      <CellButton 
+        away={away}
+        market={"total"}
+        gameID={gameID}
+        game={game}
+        cellhighlight = {lineHighlight == "total" ? 1 : 0}
+      />
     </tr>
   );
 };
 
-function addplus(oddsnum) {
-  if (oddsnum < 0) {
-    var oddsstring = oddsnum.toString()
+const CellButton = ({ away, market, gameID, game, cellhighlight }) => {
+  if (!market) return <td />;
+  return (
+    <td class={cellhighlight === 1 ? "bg-gray-300" : ""}>
+      <button class="btn">
+        <Link
+            href={{
+                pathname: "/SubmitBet/[gameID]/[team]/[market]",
+                query: {
+                    gameID: {gameID},
+                    team: away == 0 ? "home" : "away",
+                    market: market
+                }
+            }}
+            as={`/SubmitBet/${gameID}/${away}/${market}`}
+        passHref>
+          {game[away][market]}
+        </Link>
+      </button>
+    </td>
+  );
+};
+
+function addplus(oddsgameID) {
+  if (oddsgameID < 0) {
+    var oddsstring = oddsgameID.toString()
   } else {
-    var oddsstring = "+" + oddsnum.toString()
+    var oddsstring = "+" + oddsgameID.toString()
   }
   return (oddsstring)
 }

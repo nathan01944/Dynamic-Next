@@ -1,3 +1,10 @@
+Offers are stored as someone taking the offer would want it
+
+
+####
+NEXT JS README BELOW
+####
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
